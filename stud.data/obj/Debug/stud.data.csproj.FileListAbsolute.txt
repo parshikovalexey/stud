@@ -22,3 +22,4 @@ D:\stud\stud.data\bin\Debug\Microsoft.MSXML.dll
 D:\stud\stud.data\bin\Debug\SQLite.Designer.pdb
 D:\stud\stud.data\bin\Debug\EnvDTE.xml
 D:\stud\stud.data\bin\Debug\ru\Microsoft.VisualStudio.GraphModel.resources.dll
+D:\stud\stud.data\obj\Debug\stud.data.csprojResolveAssemblyReference.cache
