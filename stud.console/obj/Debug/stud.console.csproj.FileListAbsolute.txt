@@ -1,0 +1,17 @@
+D:\stud\stud.console\bin\Debug\truck0.db
+D:\stud\stud.console\bin\Debug\stud.console.exe.config
+D:\stud\stud.console\bin\Debug\stud.console.exe
+D:\stud\stud.console\bin\Debug\stud.console.pdb
+D:\stud\stud.console\bin\Debug\EntityFramework.dll
+D:\stud\stud.console\bin\Debug\EntityFramework.SqlServer.dll
+D:\stud\stud.console\bin\Debug\stud.data.dll
+D:\stud\stud.console\bin\Debug\stud.data.pdb
+D:\stud\stud.console\bin\Debug\EntityFramework.xml
+D:\stud\stud.console\bin\Debug\EntityFramework.SqlServer.xml
+D:\stud\stud.console\obj\Debug\stud.console.csprojResolveAssemblyReference.cache
+D:\stud\stud.console\obj\Debug\stud.console.exe
+D:\stud\stud.console\obj\Debug\stud.console.pdb
+D:\stud\stud.console\bin\Debug\System.Data.SQLite.dll
+D:\stud\stud.console\bin\Debug\System.Data.SQLite.EF6.dll
+D:\stud\stud.console\bin\Debug\System.Data.SQLite.Linq.dll
+D:\stud\stud.console\bin\Debug\System.Data.SQLite.xml
