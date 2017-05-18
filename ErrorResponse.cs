@@ -7,8 +7,10 @@ using System.Web;
 namespace WebApplication2.Models
 {
     public enum ErrorCodes {
-        BadWeightId = 1,
-        WeightNotFound = 2
+        InvalidWeightId = 1,
+        WeightNotFound = 2,
+        InvalidWeightModel = 3,
+        SaveWeightError = 4
     }
 
 

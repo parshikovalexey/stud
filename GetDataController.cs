@@ -37,7 +37,7 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public HttpResponseMessage GetWeightings(int? weightId) {
             if (weightId == null || weightId <= 0)
-                return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.BadWeightId, "Provide correct weightId"), JsonFormatter);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidWeightId, "Provide correct weightId"), JsonFormatter);
             try {
                 if (weightId == 1) {
                     var response = new WeightModels {
@@ -48,7 +48,23 @@ namespace WebApplication2.Controllers
                     };
                     return Request.CreateResponse(HttpStatusCode.OK, response, JsonFormatter);
                 } else
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.WeightNotFound, "No weight found against weightId"), JsonFormatter);
+                    return Request.CreateResponse(HttpStatusCode.NotFound, new ErrorResponse(ErrorCodes.WeightNotFound, "No weight found against weightId"), JsonFormatter);
+            } catch (Exception ex) {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex, JsonFormatter);
+            }
+        }
+
+        [Route("weightings")]
+        [HttpPost]
+        public HttpResponseMessage GetWeightings(WeightModels request) {
+            if (request == null || request.Weight == null)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidWeightModel, "Provide correct WeightModels"), JsonFormatter);
+            try {
+                if (request.Weight >= 10.0) {
+                    var response = request;
+                    return Request.CreateResponse(HttpStatusCode.OK, new List<WeightModels>() { response }, JsonFormatter);
+                } else
+                    return Request.CreateResponse(HttpStatusCode.NotFound, new ErrorResponse(ErrorCodes.SaveWeightError, "Weight so small"), JsonFormatter);
             } catch (Exception ex) {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex, JsonFormatter);
             }
