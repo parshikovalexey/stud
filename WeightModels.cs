@@ -8,10 +8,10 @@ namespace WebApplication2.Models
 {
     public class WeightModels
     {
-        public string titleOfItem;
-        public string date;
-        public double weight;
-        public string unitOfWeight;
+        public string TitleOfItem { get; set; }
+        public DateTime Date { get; set; }
+        public double Weight { get; set; }
+        public string UnitOfWeight { get; set; }
 
         public WeightModels() { }
     }
