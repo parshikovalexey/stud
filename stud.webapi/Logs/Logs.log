@@ -1,0 +1,22 @@
+2017-05-22 12:52:09,956  INFO  GetWeighting Request Id=13
+2017-05-22 12:52:12,012  INFO  GetWeighting Response [{"ID":13,"WEIGHTTIME":"2016-06-21T16:27:25.455178","WEIGHT":48.68,"NOTENUMBER":7,"CONTAINERTYPE":"full","TIMESTAMP":"2016-06-21T09:47:26","Sync":"true"}]
+2017-05-22 12:53:19,810  INFO  GetWeighting Request Id=13
+2017-05-22 12:53:20,721  ERROR Exception GetWeightingThe underlying provider failed on Open.
+2017-05-22 12:55:16,030  INFO  GetWeighting Request Id=13
+2017-05-22 12:55:16,972  ERROR Exception GetWeightingThe underlying provider failed on Open.
+2017-05-22 12:56:02,157  INFO  GetWeighting Request Id=13
+2017-05-22 12:56:04,470  ERROR Exception GetWeightingThe underlying provider failed on Open.
+2017-05-22 12:58:27,874  INFO  GetWeighting Request Id=13
+2017-05-22 12:58:28,795  ERROR Exception GetWeightingThe underlying provider failed on Open.
+2017-05-22 13:50:45,216  INFO  GetWeighting Request Id=13
+2017-05-22 13:50:46,204  ERROR Exception GetWeightingThe underlying provider failed on Open.
+2017-05-22 13:52:13,758  INFO  GetWeighting Request Id=13
+2017-05-22 13:52:15,671  ERROR Exception GetWeightingAn error occurred while executing the command definition. See the inner exception for details.
+2017-05-22 13:53:17,856  INFO  GetWeighting Request Id=13
+2017-05-22 13:53:19,748  ERROR Exception GetWeightingAn error occurred while executing the command definition. See the inner exception for details.
+2017-05-22 13:57:52,142  INFO  GetWeighting Request Id=13
+2017-05-22 13:57:53,007  ERROR Exception GetWeightingThe underlying provider failed on Open.
+2017-05-22 14:00:47,386  INFO  GetWeighting Request Id=13
+2017-05-22 14:00:49,682  ERROR Exception GetWeightingThe underlying provider failed on Open.
+2017-05-22 14:03:40,940  INFO  GetWeighting Request Id=13
+2017-05-22 14:03:42,863  INFO  GetWeighting Response [{"ID":13,"WEIGHTTIME":"2016-06-21T16:27:25.455178","WEIGHT":48.68,"NOTENUMBER":7,"CONTAINERTYPE":"full","TIMESTAMP":"2016-06-21T09:47:26","Sync":"true"}]
