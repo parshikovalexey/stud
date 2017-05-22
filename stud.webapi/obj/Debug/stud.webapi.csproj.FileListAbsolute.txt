@@ -52,3 +52,7 @@ D:\stud\stud.webapi\bin\System.Web.Http.WebHost.xml
 D:\stud\stud.webapi\obj\Debug\stud.webapi.csprojResolveAssemblyReference.cache
 D:\stud\stud.webapi\obj\Debug\stud.webapi.dll
 D:\stud\stud.webapi\obj\Debug\stud.webapi.pdb
+D:\stud\stud.webapi\bin\Microsoft.Web.Infrastructure.dll
+D:\stud\stud.webapi\bin\Swashbuckle.Core.dll
+D:\stud\stud.webapi\bin\WebActivatorEx.dll
+D:\stud\stud.webapi\bin\stud.webapi.XML

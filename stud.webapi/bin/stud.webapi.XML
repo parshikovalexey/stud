@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>stud.webapi</name>
+    </assembly>
+    <members>
+        <member name="M:stud.webapi.Controllers.WeightingController.GetWeightings">
+            <summary>
+            Метод возвращает все взвешивания.
+            </summary>
+            <returns>Возвращает либо все взвешивания с кодом 200, либо внутренную ошибку сервера с кодом 500</returns>
+            <response code="200">Объект найден</response>
+            <response code="500">Внуренняя ошибка сервера</response>
+        </member>
+        <member name="M:stud.webapi.Controllers.WeightingController.GetWeighting(System.Nullable{System.Int32})">
+            <summary>
+            Метод возвращает взвешивание по его ID.
+            </summary>
+            <param name="id">Идентификатор взвешиваниz</param>
+            <returns></returns>
+            <response code="200">Объект найден</response>
+            <response code="400">Некоректный ID</response>
+            <response code="404">Объекта с такам ID нет</response>
+            <response code="500">Внуренняя ошибка сервера</response>
+        </member>
+        <member name="M:stud.webapi.Controllers.WeightingController.PostWeighting(stud.data.WEIGHTING)">
+            <summary>
+            Метод для вставки нового взвешивания
+            </summary>
+            <param name="weighting">Объект нового взвешивания</param>
+            <returns></returns>
+            <response code="200">Объект добавлен успешно</response>
+            <response code="400">Передан некорекный объект взвешивания</response>
+            <response code="409">Объекта с такам ID  уже есть</response>
+            <response code="500">Внуренняя ошибка сервера</response>
+        </member>
+        <member name="M:stud.webapi.Controllers.WeightingController.PutWeighting(System.Nullable{System.Int32},stud.data.WEIGHTING)">
+            <summary>
+            Метод для обновления информации в уже произведенном взвешивании
+            </summary>
+            <param name="id">Идентификатор взвешивания, которое нужно обновить</param>
+            <param name="weighting">Объект с обновлением о взвешивании</param>
+            <returns></returns>
+            <response code="200">Объект обновлен успешно</response>
+            <response code="400">переданный id некоректен либо переданный объект для взвешивания некоректен</response>
+            <response code="409">Объекта с такам ID  для обновления не найден</response>
+            <response code="500">Внуренняя ошибка сервера</response>
+        </member>
+    </members>
+</doc>
