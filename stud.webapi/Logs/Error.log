@@ -7,3 +7,4 @@ ERROR 7 LOGGER - Exception GetWeightingAn error occurred while executing the com
 ERROR 7 LOGGER - Exception GetWeightingAn error occurred while executing the command definition. See the inner exception for details.
 ERROR 7 LOGGER - Exception GetWeightingThe underlying provider failed on Open.
 ERROR 8 LOGGER - Exception GetWeightingThe underlying provider failed on Open.
+ERROR 13 LOGGER - GetWeighting 43e3b4c2-7016-47de-b901-178afc2e573f ErrorCode ItemsNotFound
