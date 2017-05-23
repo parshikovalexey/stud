@@ -21,5 +21,7 @@ namespace stud.data
         public string CONTAINERTYPE { get; set; }
         public Nullable<System.DateTime> TIMESTAMP { get; set; }
         public string Sync { get; set; }
+    
+        public virtual NOTE NOTE { get; set; }
     }
 }

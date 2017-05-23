@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="truck0Model.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=D:\work\Develop\stud\stud\stud.data\truck0.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="NOTES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="DATE" Type="datetime" />
+          <Property Name="CUSTOMERID" Type="int" />
+          <Property Name="DRIVERID" Type="int" />
+          <Property Name="CUSTOMERTYPEID" Type="int" />
+          <Property Name="CHECKPOINTID" Type="int" />
+          <Property Name="COMMODITYID" Type="int" />
+          <Property Name="AUTONUMBER" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="CHECKNUMBER" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="TIMESTAMP" Type="datetime" />
+          <Property Name="TRANSPORTERID" Type="integer" />
+          <Property Name="CUSTOMERPERSONID" Type="integer" />
+          <Property Name="CLOSED" Type="integer" />
+          <Property Name="RETURNED" Type="integer" />
+          <Property Name="RETURNMESSAGE" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="SystemGuid" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Sync" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="endPoint" Type="int" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="waybill" Type="int" />
+          <Property Name="Reconciliation" Type="bit" />
+          <Property Name="Lock" Type="bit" />
+          <Property Name="TrailerNumber" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
+        <EntityType Name="WEIGHTINGS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WEIGHTTIME" Type="datetime" />
+          <Property Name="WEIGHT" Type="real" />
+          <Property Name="NOTENUMBER" Type="int" />
+          <Property Name="CONTAINERTYPE" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="TIMESTAMP" Type="datetime" />
+          <Property Name="Sync" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_WEIGHTINGS_0_0">
+          <End Role="NOTES" Type="Self.NOTES" Multiplicity="0..1" />
+          <End Role="WEIGHTINGS" Type="Self.WEIGHTINGS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NOTES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WEIGHTINGS">
+              <PropertyRef Name="NOTENUMBER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="truck0ModelStoreContainer">
+          <EntitySet Name="NOTES" EntityType="Self.NOTES" store:Type="Tables" />
+          <EntitySet Name="WEIGHTINGS" EntityType="Self.WEIGHTINGS" store:Type="Tables" />
+          <AssociationSet Name="FK_WEIGHTINGS_0_0" Association="Self.FK_WEIGHTINGS_0_0">
+            <End Role="NOTES" EntitySet="NOTES" />
+            <End Role="WEIGHTINGS" EntitySet="WEIGHTINGS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="truck0Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="NOTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DATE" Type="DateTime" />
+          <Property Name="CUSTOMERID" Type="Int32" />
+          <Property Name="DRIVERID" Type="Int32" />
+          <Property Name="CUSTOMERTYPEID" Type="Int32" />
+          <Property Name="CHECKPOINTID" Type="Int32" />
+          <Property Name="COMMODITYID" Type="Int32" />
+          <Property Name="AUTONUMBER" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CHECKNUMBER" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TIMESTAMP" Type="DateTime" />
+          <Property Name="TRANSPORTERID" Type="Int64" />
+          <Property Name="CUSTOMERPERSONID" Type="Int64" />
+          <Property Name="CLOSED" Type="Int64" />
+          <Property Name="RETURNED" Type="Int64" />
+          <Property Name="RETURNMESSAGE" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="SystemGuid" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="endPoint" Type="Int32" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="waybill" Type="Int32" />
+          <Property Name="Reconciliation" Type="Boolean" />
+          <Property Name="Lock" Type="Boolean" />
+          <Property Name="TrailerNumber" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WEIGHTINGS" Relationship="Self.FK_WEIGHTINGS_0_0" FromRole="NOTES" ToRole="WEIGHTINGS" />
+        </EntityType>
+        <EntityType Name="WEIGHTING">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WEIGHTTIME" Type="DateTime" />
+          <Property Name="WEIGHT" Type="Double" />
+          <Property Name="NOTENUMBER" Type="Int32" />
+          <Property Name="CONTAINERTYPE" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TIMESTAMP" Type="DateTime" />
+          <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="NOTE" Relationship="Self.FK_WEIGHTINGS_0_0" FromRole="WEIGHTINGS" ToRole="NOTES" />
+        </EntityType>
+        <Association Name="FK_WEIGHTINGS_0_0">
+          <End Role="NOTES" Type="Self.NOTE" Multiplicity="0..1" />
+          <End Role="WEIGHTINGS" Type="Self.WEIGHTING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NOTES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WEIGHTINGS">
+              <PropertyRef Name="NOTENUMBER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="truck0Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="NOTES" EntityType="Self.NOTE" />
+          <EntitySet Name="WEIGHTINGS" EntityType="Self.WEIGHTING" />
+          <AssociationSet Name="FK_WEIGHTINGS_0_0" Association="Self.FK_WEIGHTINGS_0_0">
+            <End Role="NOTES" EntitySet="NOTES" />
+            <End Role="WEIGHTINGS" EntitySet="WEIGHTINGS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="truck0ModelStoreContainer" CdmEntityContainer="truck0Entities">
+          <EntitySetMapping Name="NOTES">
+            <EntityTypeMapping TypeName="truck0Model.NOTE">
+              <MappingFragment StoreEntitySet="NOTES">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="CUSTOMERID" ColumnName="CUSTOMERID" />
+                <ScalarProperty Name="DRIVERID" ColumnName="DRIVERID" />
+                <ScalarProperty Name="CUSTOMERTYPEID" ColumnName="CUSTOMERTYPEID" />
+                <ScalarProperty Name="CHECKPOINTID" ColumnName="CHECKPOINTID" />
+                <ScalarProperty Name="COMMODITYID" ColumnName="COMMODITYID" />
+                <ScalarProperty Name="AUTONUMBER" ColumnName="AUTONUMBER" />
+                <ScalarProperty Name="CHECKNUMBER" ColumnName="CHECKNUMBER" />
+                <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
+                <ScalarProperty Name="TRANSPORTERID" ColumnName="TRANSPORTERID" />
+                <ScalarProperty Name="CUSTOMERPERSONID" ColumnName="CUSTOMERPERSONID" />
+                <ScalarProperty Name="CLOSED" ColumnName="CLOSED" />
+                <ScalarProperty Name="RETURNED" ColumnName="RETURNED" />
+                <ScalarProperty Name="RETURNMESSAGE" ColumnName="RETURNMESSAGE" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="SystemGuid" ColumnName="SystemGuid" />
+                <ScalarProperty Name="Sync" ColumnName="Sync" />
+                <ScalarProperty Name="endPoint" ColumnName="endPoint" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="waybill" ColumnName="waybill" />
+                <ScalarProperty Name="Reconciliation" ColumnName="Reconciliation" />
+                <ScalarProperty Name="Lock" ColumnName="Lock" />
+                <ScalarProperty Name="TrailerNumber" ColumnName="TrailerNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WEIGHTINGS">
+            <EntityTypeMapping TypeName="truck0Model.WEIGHTING">
+              <MappingFragment StoreEntitySet="WEIGHTINGS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WEIGHTTIME" ColumnName="WEIGHTTIME" />
+                <ScalarProperty Name="WEIGHT" ColumnName="WEIGHT" />
+                <ScalarProperty Name="NOTENUMBER" ColumnName="NOTENUMBER" />
+                <ScalarProperty Name="CONTAINERTYPE" ColumnName="CONTAINERTYPE" />
+                <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
+                <ScalarProperty Name="Sync" ColumnName="Sync" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
