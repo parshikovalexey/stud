@@ -95,6 +95,9 @@
     <Compile Include="DRIVERS.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="NOTE.cs">
+      <DependentUpon>WithKeysModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="NOTES.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
@@ -130,7 +133,24 @@
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="WEIGHTING.cs">
-      <DependentUpon>StudDBModel.tt</DependentUpon>
+      <DependentUpon>WithKeysModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WithKeysModel.Context.cs" />
+    <Compile Include="WithKeysModel.Context1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WithKeysModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WithKeysModel.cs" />
+    <Compile Include="WithKeysModel.Designer.cs">
+      <DependentUpon>WithKeysModel.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="WithKeysModel1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WithKeysModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +166,13 @@
     <None Include="truck0.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <EntityDeploy Include="WithKeysModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WithKeysModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="WithKeysModel.edmx.diagram">
+      <DependentUpon>WithKeysModel.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -160,6 +187,14 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StudDBModel.edmx</DependentUpon>
       <LastGenOutput>StudDBModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="WithKeysModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WithKeysModel.Context1.cs</LastGenOutput>
+    </Content>
+    <Content Include="WithKeysModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WithKeysModel1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
