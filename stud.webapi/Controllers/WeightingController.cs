@@ -29,6 +29,8 @@ namespace stud.webapi.Controllers
         /// <response code="200">Объект найден</response>
         /// <response code="500">Внуренняя ошибка сервера</response>
         [ResponseType(typeof(List<WEIGHTING>))]
+        [Route("weightings")]
+        [HttpGet]
         public HttpResponseMessage GetWeightings()
         {
             Guid guid = Guid.NewGuid();
@@ -59,6 +61,8 @@ namespace stud.webapi.Controllers
         /// <response code="400">Некоректный ID</response>
         /// <response code="404">Объекта с такам ID нет</response>
         /// <response code="500">Внуренняя ошибка сервера</response>
+        [Route("weightings/{id}")]
+        [HttpGet]
         public HttpResponseMessage GetWeighting(int? id)
         {
             Guid guid = Guid.NewGuid();
@@ -105,6 +109,8 @@ namespace stud.webapi.Controllers
         /// <response code="400">Передан некорекный объект взвешивания</response>
         /// <response code="409">Объекта с такам ID  уже есть</response>
         /// <response code="500">Внуренняя ошибка сервера</response>
+        [Route("weightings")]
+        [HttpPost]
         public HttpResponseMessage PostWeighting(WEIGHTING weighting)
         {
             Guid guid = Guid.NewGuid();
@@ -153,6 +159,8 @@ namespace stud.webapi.Controllers
         /// <response code="400">переданный id некоректен либо переданный объект для взвешивания некоректен</response>
         /// <response code="409">Объекта с такам ID  для обновления не найден</response>
         /// <response code="500">Внуренняя ошибка сервера</response>
+        [Route("weightings/{id}")]
+        [HttpPut]
         public HttpResponseMessage PutWeighting(int? id, WEIGHTING weighting)
         {
             Guid guid = Guid.NewGuid();
