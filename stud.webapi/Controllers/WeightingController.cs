@@ -27,22 +27,31 @@ namespace stud.webapi.Controllers
         /// </summary>
         /// <returns>Возвращает либо все взвешивания с кодом 200, либо внутренную ошибку сервера с кодом 500</returns>
         /// <response code="200">Объект найден</response>
+        /// <response code="404">Не найдено ни одного взвещивания</response>ы
         /// <response code="500">Внуренняя ошибка сервера</response>
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(List<WEIGHTING>), Description = "Collection of weightings")]
+        [SwaggerResponse(HttpStatusCode.NotFound, Type = typeof(ErrorResponse), Description = "Can't find weightings")]
+        [SwaggerResponse(HttpStatusCode.InternalServerError, Type = typeof(Exception), Description = "Server error")]
+
         [ResponseType(typeof(List<WEIGHTING>))]
         [Route("weightings")]
         [HttpGet]
         public HttpResponseMessage GetWeightings()
         {
-            Guid guid = Guid.NewGuid();
+            var guid = Guid.NewGuid();
             Logger.InitLogger();
             Logger.Log.Info("GetWeightings Request " + guid);
             try
             {
                 using (var db = new StudDBEntities())
                 {
-                    List<WEIGHTING> weightingList = db.WEIGHTING.ToList();
+                    var weightingList = db.WEIGHTING.ToList();
                     Logger.Log.Info("GetWeightings Response " + guid + " " + JsonConvert.SerializeObject(weightingList));
-                    return Request.CreateResponse(HttpStatusCode.OK, weightingList, JsonFormatter);
+                    if (weightingList.Count > 0)
+                        return Request.CreateResponse(HttpStatusCode.OK, weightingList, JsonFormatter);
+                    else
+                        return Request.CreateResponse(HttpStatusCode.NotFound,
+                            new ErrorResponse(ErrorCodes.ItemsNotFound, "No item found"), JsonFormatter);
                 }
             }
             catch (Exception e)
@@ -65,7 +74,7 @@ namespace stud.webapi.Controllers
         [HttpGet]
         public HttpResponseMessage GetWeighting(int? id)
         {
-            Guid guid = Guid.NewGuid();
+            var guid = Guid.NewGuid();
             Logger.InitLogger();
             if (id == null || id <= 0)
             {
@@ -78,11 +87,11 @@ namespace stud.webapi.Controllers
                 Logger.Log.Info("GetWeighting "  + guid + " Request Id=" + id);
                 using (var db = new StudDBEntities())
                 {
-                    List<WEIGHTING> weightingList = db.WEIGHTING.Where(i => i.ID == id).ToList();
-                    if (weightingList.Count > 0)
+                    var weighting = db.WEIGHTING.Where(i => i.ID == id).FirstOrDefault();
+                    if (weighting != null)
                     {
-                        Logger.Log.Info("GetWeighting " + guid + " Response " + JsonConvert.SerializeObject(weightingList));
-                        return Request.CreateResponse(HttpStatusCode.OK, weightingList.FirstOrDefault(), JsonFormatter);
+                        Logger.Log.Info("GetWeighting " + guid + " Response " + JsonConvert.SerializeObject(weighting));
+                        return Request.CreateResponse(HttpStatusCode.OK, weighting, JsonFormatter);
                     }
                     else
                     {
@@ -113,41 +122,61 @@ namespace stud.webapi.Controllers
         [HttpPost]
         public HttpResponseMessage PostWeighting(WEIGHTING weighting)
         {
-            Guid guid = Guid.NewGuid();
+            return addWeighting(weighting!=null ? weighting.NOTENUMBER : null, weighting);
+        }
+
+        /// <summary>
+        /// Метод для вставки нового взвешивания
+        /// </summary>
+        /// <param name="id">Идентификатор накладной</param>
+        /// <param name="weighting">Объект нового взвешивания</param>
+        /// <returns></returns>
+        /// <response code="200">Объект добавлен успешно</response>
+        /// <response code="400">Передан некорекный объект взвешивания</response>
+        /// <response code="409">Объекта с такам ID  уже есть</response>
+        /// <response code="500">Внуренняя ошибка сервера</response>
+        [Route("notes/{id}/weightings")]
+        [HttpPost]
+        public HttpResponseMessage PostWeighting(int? id, WEIGHTING weighting) {
+            return addWeighting(id, weighting);
+        }
+
+        private HttpResponseMessage addWeighting(int? noteId, WEIGHTING weighting) {
+            var guid = Guid.NewGuid();
             Logger.InitLogger();
-            if ((weighting == null) || (JsonHelper.IsAnyNull(weighting)))
-            {
+            if (noteId == null || noteId <= 0) {
+                Logger.Log.Error("PostWeighting " + guid + " ErrorCode " + ErrorCodes.InvalidItemId);
+                return Request.CreateResponse(HttpStatusCode.BadRequest,
+                    new ErrorResponse(ErrorCodes.InvalidItemId, "Provide correct itemId"), JsonFormatter);
+            }
+            if ((weighting == null) || (JsonHelper.IsAnyNull(weighting))) {
                 Logger.Log.Error("PostWeighting " + guid + " ErrorCode " + ErrorCodes.InvalidItemModel);
                 return Request.CreateResponse(HttpStatusCode.BadRequest,
                     new ErrorResponse(ErrorCodes.InvalidItemModel, "Provide correct Item"), JsonFormatter);
             }
-            try
-            {
+            //сделал просто запись notenumber, но вообще делают проверку соответствия типов
+            weighting.NOTENUMBER = noteId;
+            try {
                 Logger.Log.Info("PostWeighting " + guid + " Request " + JsonConvert.SerializeObject(weighting));
-                using (var db = new StudDBEntities())
-                {
-                    if (db.WEIGHTING.Where(i => i.ID == weighting.ID).ToList().Count == 0)
-                    {
+                using (var db = new StudDBEntities()) {
+                    if (db.WEIGHTING.Where(i => i.ID == weighting.ID).Count() == 0) {
                         db.WEIGHTING.Add(weighting);
                         db.SaveChanges();
                         Logger.Log.Info("PostWeighting  " + guid + " Response " + JsonConvert.SerializeObject(weighting));
                         return Request.CreateResponse(HttpStatusCode.OK, weighting, JsonFormatter);
-                    }
-                    else
-                    {
+                    } else {
                         Logger.Log.Error("PostWeighting " + guid + " ErrorCode " + ErrorCodes.ItemAlreadyExists);
                         return Request.CreateResponse(HttpStatusCode.Conflict,
                             new ErrorResponse(ErrorCodes.ItemAlreadyExists, "Item with same ID already exists"),
                             JsonFormatter);
                     }
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 Logger.Log.Error("PostWeighting " + guid + " Exception " + e.Message);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e, JsonFormatter);
             }
         }
+
 
         /// <summary>
         /// Метод для обновления информации в уже произведенном взвешивании
@@ -163,7 +192,7 @@ namespace stud.webapi.Controllers
         [HttpPut]
         public HttpResponseMessage PutWeighting(int? id, WEIGHTING weighting)
         {
-            Guid guid = Guid.NewGuid();
+            var guid = Guid.NewGuid();
             Logger.InitLogger();
             if (id == null || id <= 0)
             {
@@ -182,18 +211,25 @@ namespace stud.webapi.Controllers
                 Logger.Log.Info("PutWeighting " + guid + "Request " + id + " " + JsonConvert.SerializeObject(weighting));
                 using (var db = new StudDBEntities())
                 {
-                    if (db.WEIGHTING.Where(i => i.ID == weighting.ID).ToList().Count > 0)
+                    var currentWeighting = db.WEIGHTING.Where(i => i.ID == weighting.ID).FirstOrDefault();
+                    if (currentWeighting != null) 
+                    //if (db.WEIGHTING.Where(i => i.ID == weighting.ID).Count() > 0)
                     {
-                        db.WEIGHTING.Remove(db.WEIGHTING.Where(i => i.ID == id).FirstOrDefault());
-                        db.WEIGHTING.Add(weighting);
+                        //плохая практика удалять элемент и вставлять новый, это может привести к потере связей.
+                        //Правильная практика - когда ты берешь нужный элемент, обновляешь поля, которые можно 
+                        //(не факт, что АПИ позволяет все поля обновлять, например владелец какого-либо элемента должен определяться АПИ из данных сессии и не позволять его менять
+                        //db.WEIGHTING.Remove(db.WEIGHTING.Where(i => i.ID == id).FirstOrDefault());
+                        //db.WEIGHTING.Add(weighting);
+                        currentWeighting = updateWeigthing(currentWeighting, weighting);
+                        db.WEIGHTING.AddOrUpdate(currentWeighting);
                         db.SaveChanges();
                         Logger.Log.Info("PutWeighting  " + guid + " Response " + JsonConvert.SerializeObject(weighting));
-                        return Request.CreateResponse(HttpStatusCode.OK, weighting, JsonFormatter);
+                        return Request.CreateResponse(HttpStatusCode.OK, currentWeighting, JsonFormatter);
                     }
                     else
                     {
                         Logger.Log.Error("PutWeighting " + guid + " ErrorCode " + ErrorCodes.ItemsNotFound);
-                        return Request.CreateResponse(HttpStatusCode.Conflict,
+                        return Request.CreateResponse(HttpStatusCode.NotFound,
                             new ErrorResponse(ErrorCodes.ItemsNotFound, "Can't find item "),
                             JsonFormatter);
                     }
@@ -204,8 +240,17 @@ namespace stud.webapi.Controllers
                 Logger.Log.Error("PutWeighting " + guid + " Exception " + e.Message);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e, JsonFormatter);
             }
+        }
 
 
+        private WEIGHTING updateWeigthing(WEIGHTING original, WEIGHTING source) {
+            original.NOTENUMBER = source.NOTENUMBER;
+            original.WEIGHT = source.WEIGHT;
+            original.WEIGHTTIME = source.WEIGHTTIME;
+            original.Sync = source.Sync;
+            original.TIMESTAMP = source.TIMESTAMP;
+            original.CONTAINERTYPE = source.CONTAINERTYPE;
+            return original;
         }
     }
 }
