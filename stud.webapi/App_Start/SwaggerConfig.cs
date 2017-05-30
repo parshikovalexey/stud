@@ -12,7 +12,7 @@ namespace stud.webapi
     {
         public static string GetXmlCommentsPath()
         {
-            return string.Format(@"{0}\bin\BookStoreApiService.XML", AppDomain.CurrentDomain.BaseDirectory);
+            return string.Format(@"{0}\bin\stud.webapi.XML", AppDomain.CurrentDomain.BaseDirectory);
         }
 
 
