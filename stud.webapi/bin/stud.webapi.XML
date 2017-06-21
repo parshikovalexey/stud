@@ -10,6 +10,7 @@
             </summary>
             <returns>Возвращает либо все взвешивания с кодом 200, либо внутренную ошибку сервера с кодом 500</returns>
             <response code="200">Объект найден</response>
+            <response code="404">Не найдено ни одного взвещивания</response>ы
             <response code="500">Внуренняя ошибка сервера</response>
         </member>
         <member name="M:stud.webapi.Controllers.WeightingController.GetWeighting(System.Nullable{System.Int32})">
@@ -27,6 +28,18 @@
             <summary>
             Метод для вставки нового взвешивания
             </summary>
+            <param name="weighting">Объект нового взвешивания</param>
+            <returns></returns>
+            <response code="200">Объект добавлен успешно</response>
+            <response code="400">Передан некорекный объект взвешивания</response>
+            <response code="409">Объекта с такам ID  уже есть</response>
+            <response code="500">Внуренняя ошибка сервера</response>
+        </member>
+        <member name="M:stud.webapi.Controllers.WeightingController.PostWeighting(System.Nullable{System.Int32},stud.data.WEIGHTING)">
+            <summary>
+            Метод для вставки нового взвешивания
+            </summary>
+            <param name="id">Идентификатор накладной</param>
             <param name="weighting">Объект нового взвешивания</param>
             <returns></returns>
             <response code="200">Объект добавлен успешно</response>

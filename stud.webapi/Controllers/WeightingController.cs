@@ -36,7 +36,7 @@ namespace stud.webapi.Controllers
         [ResponseType(typeof(List<WEIGHTING>))]
         [Route("weightings")]
         [HttpGet]
-        public HttpResponseMessage GetWeightings()
+        public HttpResponseMessage Weightings()
         {
             var guid = Guid.NewGuid();
             Logger.InitLogger();
@@ -45,7 +45,7 @@ namespace stud.webapi.Controllers
             {
                 using (var db = new StudDBEntities())
                 {
-                    var weightingList = db.WEIGHTING.ToList();
+                    var weightingList = db.WEIGHTINGs.ToList();
                     Logger.Log.Info("GetWeightings Response " + guid + " " + JsonConvert.SerializeObject(weightingList));
                     if (weightingList.Count > 0)
                         return Request.CreateResponse(HttpStatusCode.OK, weightingList, JsonFormatter);
@@ -72,7 +72,7 @@ namespace stud.webapi.Controllers
         /// <response code="500">Внуренняя ошибка сервера</response>
         [Route("weightings/{id}")]
         [HttpGet]
-        public HttpResponseMessage GetWeighting(int? id)
+        public HttpResponseMessage Weighting(int? id)
         {
             var guid = Guid.NewGuid();
             Logger.InitLogger();
@@ -87,7 +87,7 @@ namespace stud.webapi.Controllers
                 Logger.Log.Info("GetWeighting "  + guid + " Request Id=" + id);
                 using (var db = new StudDBEntities())
                 {
-                    var weighting = db.WEIGHTING.Where(i => i.ID == id).FirstOrDefault();
+                    var weighting = db.WEIGHTINGs.Where(i => i.ID == id).FirstOrDefault();
                     if (weighting != null)
                     {
                         Logger.Log.Info("GetWeighting " + guid + " Response " + JsonConvert.SerializeObject(weighting));
@@ -120,9 +120,9 @@ namespace stud.webapi.Controllers
         /// <response code="500">Внуренняя ошибка сервера</response>
         [Route("weightings")]
         [HttpPost]
-        public HttpResponseMessage PostWeighting(WEIGHTING weighting)
+        public HttpResponseMessage Weighting(WEIGHTING weighting)
         {
-            return addWeighting(weighting!=null ? weighting.NOTENUMBER : null, weighting);
+            return addWeighting(weighting !=null ? weighting.NOTENUMBER : null, weighting);
         }
 
         /// <summary>
@@ -137,11 +137,11 @@ namespace stud.webapi.Controllers
         /// <response code="500">Внуренняя ошибка сервера</response>
         [Route("notes/{id}/weightings")]
         [HttpPost]
-        public HttpResponseMessage PostWeighting(int? id, WEIGHTING weighting) {
+        public HttpResponseMessage Weighting(int? id, WEIGHTING weighting) {
             return addWeighting(id, weighting);
         }
 
-        private HttpResponseMessage addWeighting(int? noteId, WEIGHTING weighting) {
+        private HttpResponseMessage addWeighting(long? noteId, WEIGHTING weighting) {
             var guid = Guid.NewGuid();
             Logger.InitLogger();
             if (noteId == null || noteId <= 0) {
@@ -159,8 +159,8 @@ namespace stud.webapi.Controllers
             try {
                 Logger.Log.Info("PostWeighting " + guid + " Request " + JsonConvert.SerializeObject(weighting));
                 using (var db = new StudDBEntities()) {
-                    if (db.WEIGHTING.Where(i => i.ID == weighting.ID).Count() == 0) {
-                        db.WEIGHTING.Add(weighting);
+                    if (db.WEIGHTINGs.Where(i => i.ID == weighting.ID).Count() == 0) {
+                        db.WEIGHTINGs.Add(weighting);
                         db.SaveChanges();
                         Logger.Log.Info("PostWeighting  " + guid + " Response " + JsonConvert.SerializeObject(weighting));
                         return Request.CreateResponse(HttpStatusCode.OK, weighting, JsonFormatter);
@@ -211,7 +211,7 @@ namespace stud.webapi.Controllers
                 Logger.Log.Info("PutWeighting " + guid + "Request " + id + " " + JsonConvert.SerializeObject(weighting));
                 using (var db = new StudDBEntities())
                 {
-                    var currentWeighting = db.WEIGHTING.Where(i => i.ID == weighting.ID).FirstOrDefault();
+                    var currentWeighting = db.WEIGHTINGs.Where(i => i.ID == weighting.ID).FirstOrDefault();
                     if (currentWeighting != null) 
                     //if (db.WEIGHTING.Where(i => i.ID == weighting.ID).Count() > 0)
                     {
@@ -221,7 +221,7 @@ namespace stud.webapi.Controllers
                         //db.WEIGHTING.Remove(db.WEIGHTING.Where(i => i.ID == id).FirstOrDefault());
                         //db.WEIGHTING.Add(weighting);
                         currentWeighting = updateWeigthing(currentWeighting, weighting);
-                        db.WEIGHTING.AddOrUpdate(currentWeighting);
+                        db.WEIGHTINGs.AddOrUpdate(currentWeighting);
                         db.SaveChanges();
                         Logger.Log.Info("PutWeighting  " + guid + " Response " + JsonConvert.SerializeObject(weighting));
                         return Request.CreateResponse(HttpStatusCode.OK, currentWeighting, JsonFormatter);

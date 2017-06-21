@@ -1,32 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="studdataStoreContainer" CdmEntityContainer="StudDBEntities">
-    <EntitySetMapping Name="AUTODRIVERCUSTOMER">
-      <EntityTypeMapping TypeName="stud.data.AUTODRIVERCUSTOMER">
+  <EntityContainerMapping StorageEntityContainer="StudDBModelStoreContainer" CdmEntityContainer="StudDBEntities">
+    <EntitySetMapping Name="AUTODRIVERCUSTOMERs">
+      <EntityTypeMapping TypeName="StudDBModel.AUTODRIVERCUSTOMER">
         <MappingFragment StoreEntitySet="AUTODRIVERCUSTOMER">
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
+          <ScalarProperty Name="Sync" ColumnName="Sync" />
           <ScalarProperty Name="DRIVERID" ColumnName="DRIVERID" />
           <ScalarProperty Name="AUTOID" ColumnName="AUTOID" />
           <ScalarProperty Name="CUSTOMERID" ColumnName="CUSTOMERID" />
-          <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
           <ScalarProperty Name="CUSTOMERPERSONID" ColumnName="CUSTOMERPERSONID" />
-          <ScalarProperty Name="Sync" ColumnName="Sync" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AUTOS">
-      <EntityTypeMapping TypeName="stud.data.AUTOS">
+      <EntityTypeMapping TypeName="StudDBModel.AUTO">
         <MappingFragment StoreEntitySet="AUTOS">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="AUTONUMBER" ColumnName="AUTONUMBER" />
           <ScalarProperty Name="BRAND" ColumnName="BRAND" />
           <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
           <ScalarProperty Name="Sync" ColumnName="Sync" />
+          <ScalarProperty Name="PathPhoto" ColumnName="PathPhoto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CHECKPOINTS">
-      <EntityTypeMapping TypeName="stud.data.CHECKPOINTS">
+      <EntityTypeMapping TypeName="StudDBModel.CHECKPOINT">
         <MappingFragment StoreEntitySet="CHECKPOINTS">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="NAME" ColumnName="NAME" />
@@ -38,7 +39,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="COMMODITIES">
-      <EntityTypeMapping TypeName="stud.data.COMMODITIES">
+      <EntityTypeMapping TypeName="StudDBModel.COMMODITy">
         <MappingFragment StoreEntitySet="COMMODITIES">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="NAME" ColumnName="NAME" />
@@ -50,7 +51,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CUSTOMERPERSONS">
-      <EntityTypeMapping TypeName="stud.data.CUSTOMERPERSONS">
+      <EntityTypeMapping TypeName="StudDBModel.CUSTOMERPERSON">
         <MappingFragment StoreEntitySet="CUSTOMERPERSONS">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="NAME" ColumnName="NAME" />
@@ -62,7 +63,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CUSTOMERS">
-      <EntityTypeMapping TypeName="stud.data.CUSTOMERS">
+      <EntityTypeMapping TypeName="StudDBModel.CUSTOMER">
         <MappingFragment StoreEntitySet="CUSTOMERS">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
@@ -78,18 +79,19 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CUSTOMERTYPES">
-      <EntityTypeMapping TypeName="stud.data.CUSTOMERTYPES">
+      <EntityTypeMapping TypeName="StudDBModel.CUSTOMERTYPE">
         <MappingFragment StoreEntitySet="CUSTOMERTYPES">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="NAME" ColumnName="NAME" />
           <ScalarProperty Name="TEMPLATE_PREFIX" ColumnName="TEMPLATE_PREFIX" />
           <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
           <ScalarProperty Name="Sync" ColumnName="Sync" />
+          <ScalarProperty Name="CheckNumberAccounting" ColumnName="CheckNumberAccounting" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DRIVERS">
-      <EntityTypeMapping TypeName="stud.data.DRIVERS">
+      <EntityTypeMapping TypeName="StudDBModel.DRIVER">
         <MappingFragment StoreEntitySet="DRIVERS">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
@@ -99,37 +101,39 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="NOTES">
-      <EntityTypeMapping TypeName="stud.data.NOTES">
+      <EntityTypeMapping TypeName="StudDBModel.NOTE">
         <MappingFragment StoreEntitySet="NOTES">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="DATE" ColumnName="DATE" />
+          <ScalarProperty Name="AUTONUMBER" ColumnName="AUTONUMBER" />
+          <ScalarProperty Name="CHECKNUMBER" ColumnName="CHECKNUMBER" />
+          <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
+          <ScalarProperty Name="CLOSED" ColumnName="CLOSED" />
+          <ScalarProperty Name="RETURNED" ColumnName="RETURNED" />
+          <ScalarProperty Name="RETURNMESSAGE" ColumnName="RETURNMESSAGE" />
+          <ScalarProperty Name="SystemGuid" ColumnName="SystemGuid" />
+          <ScalarProperty Name="Sync" ColumnName="Sync" />
+          <ScalarProperty Name="waybill" ColumnName="waybill" />
+          <ScalarProperty Name="Reconciliation" ColumnName="Reconciliation" />
+          <ScalarProperty Name="Lock" ColumnName="Lock" />
+          <ScalarProperty Name="TrailerNumber" ColumnName="TrailerNumber" />
+          <ScalarProperty Name="Pile" ColumnName="Pile" />
+          <ScalarProperty Name="StorageId" ColumnName="StorageId" />
           <ScalarProperty Name="CUSTOMERID" ColumnName="CUSTOMERID" />
           <ScalarProperty Name="DRIVERID" ColumnName="DRIVERID" />
           <ScalarProperty Name="CUSTOMERTYPEID" ColumnName="CUSTOMERTYPEID" />
           <ScalarProperty Name="CHECKPOINTID" ColumnName="CHECKPOINTID" />
           <ScalarProperty Name="COMMODITYID" ColumnName="COMMODITYID" />
-          <ScalarProperty Name="AUTONUMBER" ColumnName="AUTONUMBER" />
-          <ScalarProperty Name="CHECKNUMBER" ColumnName="CHECKNUMBER" />
-          <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
           <ScalarProperty Name="TRANSPORTERID" ColumnName="TRANSPORTERID" />
           <ScalarProperty Name="CUSTOMERPERSONID" ColumnName="CUSTOMERPERSONID" />
-          <ScalarProperty Name="CLOSED" ColumnName="CLOSED" />
-          <ScalarProperty Name="RETURNED" ColumnName="RETURNED" />
-          <ScalarProperty Name="RETURNMESSAGE" ColumnName="RETURNMESSAGE" />
           <ScalarProperty Name="USERID" ColumnName="USERID" />
-          <ScalarProperty Name="SystemGuid" ColumnName="SystemGuid" />
-          <ScalarProperty Name="Sync" ColumnName="Sync" />
           <ScalarProperty Name="endPoint" ColumnName="endPoint" />
           <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-          <ScalarProperty Name="waybill" ColumnName="waybill" />
-          <ScalarProperty Name="Reconciliation" ColumnName="Reconciliation" />
-          <ScalarProperty Name="Lock" ColumnName="Lock" />
-          <ScalarProperty Name="TrailerNumber" ColumnName="TrailerNumber" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ORGANIZATIONS">
-      <EntityTypeMapping TypeName="stud.data.ORGANIZATIONS">
+      <EntityTypeMapping TypeName="StudDBModel.ORGANIZATION">
         <MappingFragment StoreEntitySet="ORGANIZATIONS">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="NAME" ColumnName="NAME" />
@@ -138,6 +142,7 @@
           <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
           <ScalarProperty Name="LEGALADDRESS" ColumnName="LEGALADDRESS" />
           <ScalarProperty Name="Sync" ColumnName="Sync" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="DefaultOrganizations" ColumnName="DefaultOrganizations" />
           <ScalarProperty Name="SystemGuid" ColumnName="SystemGuid" />
@@ -146,17 +151,19 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SNAPSHOTS">
-      <EntityTypeMapping TypeName="stud.data.SNAPSHOTS">
+      <EntityTypeMapping TypeName="StudDBModel.SNAPSHOT">
         <MappingFragment StoreEntitySet="SNAPSHOTS">
-          <ScalarProperty Name="NAME" ColumnName="NAME" />
-          <ScalarProperty Name="NOTENUMBER" ColumnName="NOTENUMBER" />
+          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
           <ScalarProperty Name="Sync" ColumnName="Sync" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="NOTENUMBER" ColumnName="NOTENUMBER" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TRASPORTERAUTOS">
-      <EntityTypeMapping TypeName="stud.data.TRASPORTERAUTOS">
+      <EntityTypeMapping TypeName="StudDBModel.TRASPORTERAUTO">
         <MappingFragment StoreEntitySet="TRASPORTERAUTOS">
           <ScalarProperty Name="TRANSPORTERID" ColumnName="TRANSPORTERID" />
           <ScalarProperty Name="AUTOID" ColumnName="AUTOID" />
@@ -166,7 +173,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TRASPORTERS">
-      <EntityTypeMapping TypeName="stud.data.TRASPORTERS">
+      <EntityTypeMapping TypeName="StudDBModel.TRASPORTER">
         <MappingFragment StoreEntitySet="TRASPORTERS">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="NAME" ColumnName="NAME" />
@@ -182,10 +189,10 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="USERS">
-      <EntityTypeMapping TypeName="stud.data.USERS">
+      <EntityTypeMapping TypeName="StudDBModel.USER">
         <MappingFragment StoreEntitySet="USERS">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="LOGIN" ColumnName="LOGIN" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
           <ScalarProperty Name="PWD" ColumnName="PWD" />
           <ScalarProperty Name="NAME" ColumnName="NAME" />
           <ScalarProperty Name="ADMIN" ColumnName="ADMIN" />
@@ -196,16 +203,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="WEIGHTING">
-      <EntityTypeMapping TypeName="stud.data.WEIGHTING">
+    <EntitySetMapping Name="WEIGHTINGs">
+      <EntityTypeMapping TypeName="StudDBModel.WEIGHTING">
         <MappingFragment StoreEntitySet="WEIGHTING">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="WEIGHTTIME" ColumnName="WEIGHTTIME" />
           <ScalarProperty Name="WEIGHT" ColumnName="WEIGHT" />
-          <ScalarProperty Name="NOTENUMBER" ColumnName="NOTENUMBER" />
           <ScalarProperty Name="CONTAINERTYPE" ColumnName="CONTAINERTYPE" />
           <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
           <ScalarProperty Name="Sync" ColumnName="Sync" />
+          <ScalarProperty Name="NOTENUMBER" ColumnName="NOTENUMBER" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

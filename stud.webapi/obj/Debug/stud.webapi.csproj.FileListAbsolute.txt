@@ -1,4 +1,3 @@
-D:\stud\stud.webapi\bin\truck0.db
 D:\stud\stud.webapi\bin\ApplicationInsights.config
 D:\stud\stud.webapi\bin\roslyn\csc.exe
 D:\stud\stud.webapi\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll

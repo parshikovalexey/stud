@@ -15,11 +15,16 @@ namespace stud.data
     public partial class AUTODRIVERCUSTOMER
     {
         public long ID { get; set; }
+        public Nullable<System.DateTime> TIMESTAMP { get; set; }
+        public string Sync { get; set; }
         public Nullable<long> DRIVERID { get; set; }
         public Nullable<long> AUTOID { get; set; }
         public Nullable<long> CUSTOMERID { get; set; }
-        public Nullable<System.DateTime> TIMESTAMP { get; set; }
         public Nullable<long> CUSTOMERPERSONID { get; set; }
-        public string Sync { get; set; }
+    
+        public virtual CUSTOMERPERSON CUSTOMERPERSON { get; set; }
+        public virtual CUSTOMER CUSTOMER { get; set; }
+        public virtual AUTO AUTO { get; set; }
+        public virtual DRIVER DRIVER { get; set; }
     }
 }

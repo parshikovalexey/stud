@@ -11,7 +11,8 @@ namespace stud.console
         static void Main(string[] args)
         {
             var _db = new StudDBEntities();
-            Console.WriteLine(_db.AUTOS.FirstOrDefault().AUTONUMBER.ToString());
+            var list = _db.NOTES.ToList();
+           
             Console.ReadLine();
         }
     }

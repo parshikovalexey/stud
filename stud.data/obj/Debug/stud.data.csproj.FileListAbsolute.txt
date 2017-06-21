@@ -1,4 +1,3 @@
-D:\stud\stud.data\bin\Debug\truck0.db
 D:\stud\stud.data\bin\Debug\stud.data.dll
 D:\stud\stud.data\bin\Debug\stud.data.pdb
 D:\stud\stud.data\obj\Debug\stud.data.dll
@@ -22,4 +21,3 @@ D:\stud\stud.data\bin\Debug\Microsoft.MSXML.dll
 D:\stud\stud.data\bin\Debug\SQLite.Designer.pdb
 D:\stud\stud.data\bin\Debug\EnvDTE.xml
 D:\stud\stud.data\bin\Debug\ru\Microsoft.VisualStudio.GraphModel.resources.dll
-D:\stud\stud.data\obj\Debug\stud.data.csprojResolveAssemblyReference.cache

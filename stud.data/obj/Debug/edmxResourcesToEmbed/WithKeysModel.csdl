@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="truck0Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="NOTE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="DATE" Type="DateTime" />
+    <Property Name="CUSTOMERID" Type="Int32" />
+    <Property Name="DRIVERID" Type="Int32" />
+    <Property Name="CUSTOMERTYPEID" Type="Int32" />
+    <Property Name="CHECKPOINTID" Type="Int32" />
+    <Property Name="COMMODITYID" Type="Int32" />
+    <Property Name="AUTONUMBER" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="CHECKNUMBER" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="TIMESTAMP" Type="DateTime" />
+    <Property Name="TRANSPORTERID" Type="Int64" />
+    <Property Name="CUSTOMERPERSONID" Type="Int64" />
+    <Property Name="CLOSED" Type="Int64" />
+    <Property Name="RETURNED" Type="Int64" />
+    <Property Name="RETURNMESSAGE" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="USERID" Type="Int32" />
+    <Property Name="SystemGuid" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="endPoint" Type="Int32" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="waybill" Type="Int32" />
+    <Property Name="Reconciliation" Type="Boolean" />
+    <Property Name="Lock" Type="Boolean" />
+    <Property Name="TrailerNumber" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WEIGHTINGS" Relationship="Self.FK_WEIGHTINGS_0_0" FromRole="NOTES" ToRole="WEIGHTINGS" />
+  </EntityType>
+  <EntityType Name="WEIGHTING">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WEIGHTTIME" Type="DateTime" />
+    <Property Name="WEIGHT" Type="Double" />
+    <Property Name="NOTENUMBER" Type="Int32" />
+    <Property Name="CONTAINERTYPE" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="TIMESTAMP" Type="DateTime" />
+    <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="NOTE" Relationship="Self.FK_WEIGHTINGS_0_0" FromRole="WEIGHTINGS" ToRole="NOTES" />
+  </EntityType>
+  <Association Name="FK_WEIGHTINGS_0_0">
+    <End Role="NOTES" Type="Self.NOTE" Multiplicity="0..1" />
+    <End Role="WEIGHTINGS" Type="Self.WEIGHTING" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NOTES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WEIGHTINGS">
+        <PropertyRef Name="NOTENUMBER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="truck0Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="NOTES" EntityType="Self.NOTE" />
+    <EntitySet Name="WEIGHTINGS" EntityType="Self.WEIGHTING" />
+    <AssociationSet Name="FK_WEIGHTINGS_0_0" Association="Self.FK_WEIGHTINGS_0_0">
+      <End Role="NOTES" EntitySet="NOTES" />
+      <End Role="WEIGHTINGS" EntitySet="WEIGHTINGS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

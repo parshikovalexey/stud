@@ -25,20 +25,20 @@ namespace stud.data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AUTODRIVERCUSTOMER> AUTODRIVERCUSTOMER { get; set; }
-        public virtual DbSet<AUTOS> AUTOS { get; set; }
-        public virtual DbSet<CHECKPOINTS> CHECKPOINTS { get; set; }
-        public virtual DbSet<COMMODITIES> COMMODITIES { get; set; }
-        public virtual DbSet<CUSTOMERPERSONS> CUSTOMERPERSONS { get; set; }
-        public virtual DbSet<CUSTOMERS> CUSTOMERS { get; set; }
-        public virtual DbSet<CUSTOMERTYPES> CUSTOMERTYPES { get; set; }
-        public virtual DbSet<DRIVERS> DRIVERS { get; set; }
-        public virtual DbSet<NOTES> NOTES { get; set; }
-        public virtual DbSet<ORGANIZATIONS> ORGANIZATIONS { get; set; }
-        public virtual DbSet<SNAPSHOTS> SNAPSHOTS { get; set; }
-        public virtual DbSet<TRASPORTERAUTOS> TRASPORTERAUTOS { get; set; }
-        public virtual DbSet<TRASPORTERS> TRASPORTERS { get; set; }
-        public virtual DbSet<USERS> USERS { get; set; }
-        public virtual DbSet<WEIGHTING> WEIGHTING { get; set; }
+        public virtual DbSet<AUTODRIVERCUSTOMER> AUTODRIVERCUSTOMERs { get; set; }
+        public virtual DbSet<AUTO> AUTOS { get; set; }
+        public virtual DbSet<CHECKPOINT> CHECKPOINTS { get; set; }
+        public virtual DbSet<COMMODITy> COMMODITIES { get; set; }
+        public virtual DbSet<CUSTOMERPERSON> CUSTOMERPERSONS { get; set; }
+        public virtual DbSet<CUSTOMER> CUSTOMERS { get; set; }
+        public virtual DbSet<CUSTOMERTYPE> CUSTOMERTYPES { get; set; }
+        public virtual DbSet<DRIVER> DRIVERS { get; set; }
+        public virtual DbSet<NOTE> NOTES { get; set; }
+        public virtual DbSet<ORGANIZATION> ORGANIZATIONS { get; set; }
+        public virtual DbSet<SNAPSHOT> SNAPSHOTS { get; set; }
+        public virtual DbSet<TRASPORTERAUTO> TRASPORTERAUTOS { get; set; }
+        public virtual DbSet<TRASPORTER> TRASPORTERS { get; set; }
+        public virtual DbSet<USER> USERS { get; set; }
+        public virtual DbSet<WEIGHTING> WEIGHTINGs { get; set; }
     }
 }

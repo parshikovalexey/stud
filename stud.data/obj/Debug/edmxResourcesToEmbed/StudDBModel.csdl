@@ -1,18 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="stud.data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="StudDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="AUTODRIVERCUSTOMER">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TIMESTAMP" Type="DateTime" />
+    <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DRIVERID" Type="Int64" />
     <Property Name="AUTOID" Type="Int64" />
     <Property Name="CUSTOMERID" Type="Int64" />
-    <Property Name="TIMESTAMP" Type="DateTime" />
     <Property Name="CUSTOMERPERSONID" Type="Int64" />
-    <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CUSTOMERPERSON" Relationship="Self.FK_AUTODRIVERCUSTOMER_0_0" FromRole="AUTODRIVERCUSTOMER" ToRole="CUSTOMERPERSONS" />
+    <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_AUTODRIVERCUSTOMER_1_0" FromRole="AUTODRIVERCUSTOMER" ToRole="CUSTOMERS" />
+    <NavigationProperty Name="AUTO" Relationship="Self.FK_AUTODRIVERCUSTOMER_2_0" FromRole="AUTODRIVERCUSTOMER" ToRole="AUTOS" />
+    <NavigationProperty Name="DRIVER" Relationship="Self.FK_AUTODRIVERCUSTOMER_3_0" FromRole="AUTODRIVERCUSTOMER" ToRole="DRIVERS" />
   </EntityType>
-  <EntityType Name="AUTOS">
+  <EntityType Name="AUTO">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -21,8 +25,11 @@
     <Property Name="BRAND" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="TIMESTAMP" Type="DateTime" />
     <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PathPhoto" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AUTODRIVERCUSTOMERs" Relationship="Self.FK_AUTODRIVERCUSTOMER_2_0" FromRole="AUTOS" ToRole="AUTODRIVERCUSTOMER" />
+    <NavigationProperty Name="TRASPORTERAUTOS" Relationship="Self.FK_TRASPORTERAUTOS_0_0" FromRole="AUTOS" ToRole="TRASPORTERAUTOS" />
   </EntityType>
-  <EntityType Name="CHECKPOINTS">
+  <EntityType Name="CHECKPOINT">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -32,8 +39,9 @@
     <Property Name="ADDRESS" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
     <Property Name="TIMESTAMP" Type="DateTime" />
     <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="NOTES" Relationship="Self.FK_NOTES_6_0" FromRole="CHECKPOINTS" ToRole="NOTES" />
   </EntityType>
-  <EntityType Name="COMMODITIES">
+  <EntityType Name="COMMODITy">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -43,8 +51,9 @@
     <Property Name="ACTIVE" Type="Int32" />
     <Property Name="TIMESTAMP" Type="DateTime" />
     <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="NOTES" Relationship="Self.FK_NOTES_5_0" FromRole="COMMODITIES" ToRole="NOTES" />
   </EntityType>
-  <EntityType Name="CUSTOMERPERSONS">
+  <EntityType Name="CUSTOMERPERSON">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -54,8 +63,10 @@
     <Property Name="INFO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
     <Property Name="TIMESTAMP" Type="DateTime" />
     <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AUTODRIVERCUSTOMERs" Relationship="Self.FK_AUTODRIVERCUSTOMER_0_0" FromRole="CUSTOMERPERSONS" ToRole="AUTODRIVERCUSTOMER" />
+    <NavigationProperty Name="NOTES" Relationship="Self.FK_NOTES_3_0" FromRole="CUSTOMERPERSONS" ToRole="NOTES" />
   </EntityType>
-  <EntityType Name="CUSTOMERS">
+  <EntityType Name="CUSTOMER">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -69,8 +80,10 @@
     <Property Name="CEOFIO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="LEGALADDRESS" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AUTODRIVERCUSTOMERs" Relationship="Self.FK_AUTODRIVERCUSTOMER_1_0" FromRole="CUSTOMERS" ToRole="AUTODRIVERCUSTOMER" />
+    <NavigationProperty Name="NOTES" Relationship="Self.FK_NOTES_9_0" FromRole="CUSTOMERS" ToRole="NOTES" />
   </EntityType>
-  <EntityType Name="CUSTOMERTYPES">
+  <EntityType Name="CUSTOMERTYPE">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -79,8 +92,10 @@
     <Property Name="TEMPLATE_PREFIX" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
     <Property Name="TIMESTAMP" Type="DateTime" />
     <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CheckNumberAccounting" Type="Boolean" />
+    <NavigationProperty Name="NOTES" Relationship="Self.FK_NOTES_7_0" FromRole="CUSTOMERTYPES" ToRole="NOTES" />
   </EntityType>
-  <EntityType Name="DRIVERS">
+  <EntityType Name="DRIVER">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -88,37 +103,54 @@
     <Property Name="FULLNAME" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
     <Property Name="TIMESTAMP" Type="DateTime" />
     <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AUTODRIVERCUSTOMERs" Relationship="Self.FK_AUTODRIVERCUSTOMER_3_0" FromRole="DRIVERS" ToRole="AUTODRIVERCUSTOMER" />
+    <NavigationProperty Name="NOTES" Relationship="Self.FK_NOTES_8_0" FromRole="DRIVERS" ToRole="NOTES" />
   </EntityType>
-  <EntityType Name="NOTES">
+  <EntityType Name="NOTE">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DATE" Type="DateTime" />
-    <Property Name="CUSTOMERID" Type="Int32" />
-    <Property Name="DRIVERID" Type="Int32" />
-    <Property Name="CUSTOMERTYPEID" Type="Int32" />
-    <Property Name="CHECKPOINTID" Type="Int32" />
-    <Property Name="COMMODITYID" Type="Int32" />
     <Property Name="AUTONUMBER" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
     <Property Name="CHECKNUMBER" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
     <Property Name="TIMESTAMP" Type="DateTime" />
-    <Property Name="TRANSPORTERID" Type="Int64" />
-    <Property Name="CUSTOMERPERSONID" Type="Int64" />
-    <Property Name="CLOSED" Type="Int64" />
-    <Property Name="RETURNED" Type="Int64" />
+    <Property Name="CLOSED" Type="Int32" />
+    <Property Name="RETURNED" Type="Int32" />
     <Property Name="RETURNMESSAGE" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-    <Property Name="USERID" Type="Int32" />
     <Property Name="SystemGuid" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
     <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="endPoint" Type="Int32" />
-    <Property Name="ParentId" Type="Int32" />
     <Property Name="waybill" Type="Int32" />
     <Property Name="Reconciliation" Type="Boolean" />
     <Property Name="Lock" Type="Boolean" />
     <Property Name="TrailerNumber" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Pile" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="StorageId" Type="Int64" />
+    <Property Name="CUSTOMERID" Type="Int64" />
+    <Property Name="DRIVERID" Type="Int64" />
+    <Property Name="CUSTOMERTYPEID" Type="Int64" Nullable="false" />
+    <Property Name="CHECKPOINTID" Type="Int64" />
+    <Property Name="COMMODITYID" Type="Int64" />
+    <Property Name="TRANSPORTERID" Type="Int64" />
+    <Property Name="CUSTOMERPERSONID" Type="Int64" />
+    <Property Name="USERID" Type="Int64" />
+    <Property Name="endPoint" Type="Int64" />
+    <Property Name="ParentId" Type="Int64" />
+    <NavigationProperty Name="CHECKPOINT" Relationship="Self.FK_NOTES_6_0" FromRole="NOTES" ToRole="CHECKPOINTS" />
+    <NavigationProperty Name="COMMODITy" Relationship="Self.FK_NOTES_5_0" FromRole="NOTES" ToRole="COMMODITIES" />
+    <NavigationProperty Name="CUSTOMERPERSON" Relationship="Self.FK_NOTES_3_0" FromRole="NOTES" ToRole="CUSTOMERPERSONS" />
+    <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_NOTES_9_0" FromRole="NOTES" ToRole="CUSTOMERS" />
+    <NavigationProperty Name="CUSTOMERTYPE" Relationship="Self.FK_NOTES_7_0" FromRole="NOTES" ToRole="CUSTOMERTYPES" />
+    <NavigationProperty Name="DRIVER" Relationship="Self.FK_NOTES_8_0" FromRole="NOTES" ToRole="DRIVERS" />
+    <NavigationProperty Name="NOTES1" Relationship="Self.FK_NOTES_0_0" FromRole="NOTES" ToRole="NOTES1" />
+    <NavigationProperty Name="NOTE1" Relationship="Self.FK_NOTES_0_0" FromRole="NOTES1" ToRole="NOTES" />
+    <NavigationProperty Name="ORGANIZATION" Relationship="Self.FK_NOTES_1_0" FromRole="NOTES" ToRole="ORGANIZATIONS" />
+    <NavigationProperty Name="USER" Relationship="Self.FK_NOTES_2_0" FromRole="NOTES" ToRole="USERS" />
+    <NavigationProperty Name="TRASPORTER" Relationship="Self.FK_NOTES_4_0" FromRole="NOTES" ToRole="TRASPORTERS" />
+    <NavigationProperty Name="SNAPSHOTS" Relationship="Self.FK_SNAPSHOTS_0_0" FromRole="NOTES" ToRole="SNAPSHOTS" />
+    <NavigationProperty Name="WEIGHTINGs" Relationship="Self.FK_WEIGHTING_0_0" FromRole="NOTES" ToRole="WEIGHTING" />
   </EntityType>
-  <EntityType Name="ORGANIZATIONS">
+  <EntityType Name="ORGANIZATION">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -129,21 +161,26 @@
     <Property Name="TIMESTAMP" Type="DateTime" />
     <Property Name="LEGALADDRESS" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Boolean" />
     <Property Name="Type" Type="Int32" />
     <Property Name="DefaultOrganizations" Type="Boolean" />
     <Property Name="SystemGuid" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
     <Property Name="WarehouseManager" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NOTES" Relationship="Self.FK_NOTES_1_0" FromRole="ORGANIZATIONS" ToRole="NOTES" />
   </EntityType>
-  <EntityType Name="SNAPSHOTS">
+  <EntityType Name="SNAPSHOT">
     <Key>
-      <PropertyRef Name="NAME" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="NAME" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="NOTENUMBER" Type="Int32" />
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TIMESTAMP" Type="DateTime" />
     <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="Int32" />
+    <Property Name="NOTENUMBER" Type="Int64" />
+    <NavigationProperty Name="NOTE" Relationship="Self.FK_SNAPSHOTS_0_0" FromRole="SNAPSHOTS" ToRole="NOTES" />
   </EntityType>
-  <EntityType Name="TRASPORTERAUTOS">
+  <EntityType Name="TRASPORTERAUTO">
     <Key>
       <PropertyRef Name="TRANSPORTERID" />
       <PropertyRef Name="AUTOID" />
@@ -152,8 +189,10 @@
     <Property Name="AUTOID" Type="Int64" Nullable="false" />
     <Property Name="TIMESTAMP" Type="DateTime" />
     <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AUTO" Relationship="Self.FK_TRASPORTERAUTOS_0_0" FromRole="TRASPORTERAUTOS" ToRole="AUTOS" />
+    <NavigationProperty Name="TRASPORTER" Relationship="Self.FK_TRASPORTERAUTOS_1_0" FromRole="TRASPORTERAUTOS" ToRole="TRASPORTERS" />
   </EntityType>
-  <EntityType Name="TRASPORTERS">
+  <EntityType Name="TRASPORTER">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -167,20 +206,23 @@
     <Property Name="CEOFIO" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
     <Property Name="LEGALADDRESS" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="NOTES" Relationship="Self.FK_NOTES_4_0" FromRole="TRASPORTERS" ToRole="NOTES" />
+    <NavigationProperty Name="TRASPORTERAUTOS" Relationship="Self.FK_TRASPORTERAUTOS_1_0" FromRole="TRASPORTERS" ToRole="TRASPORTERAUTOS" />
   </EntityType>
-  <EntityType Name="USERS">
+  <EntityType Name="USER">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="LOGIN" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Login" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
     <Property Name="PWD" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
     <Property Name="NAME" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-    <Property Name="ADMIN" Type="Int64" />
+    <Property Name="ADMIN" Type="Boolean" />
     <Property Name="TIMESTAMP" Type="DateTime" />
     <Property Name="POSITION" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="EDITOR" Type="Int32" Nullable="false" />
     <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="NOTES" Relationship="Self.FK_NOTES_2_0" FromRole="USERS" ToRole="NOTES" />
   </EntityType>
   <EntityType Name="WEIGHTING">
     <Key>
@@ -189,26 +231,315 @@
     <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="WEIGHTTIME" Type="DateTime" />
     <Property Name="WEIGHT" Type="Double" />
-    <Property Name="NOTENUMBER" Type="Int32" />
     <Property Name="CONTAINERTYPE" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
     <Property Name="TIMESTAMP" Type="DateTime" />
     <Property Name="Sync" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NOTENUMBER" Type="Int64" />
+    <NavigationProperty Name="NOTE" Relationship="Self.FK_WEIGHTING_0_0" FromRole="WEIGHTING" ToRole="NOTES" />
   </EntityType>
+  <Association Name="FK_AUTODRIVERCUSTOMER_0_0">
+    <End Role="CUSTOMERPERSONS" Type="Self.CUSTOMERPERSON" Multiplicity="0..1" />
+    <End Role="AUTODRIVERCUSTOMER" Type="Self.AUTODRIVERCUSTOMER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMERPERSONS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AUTODRIVERCUSTOMER">
+        <PropertyRef Name="CUSTOMERPERSONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AUTODRIVERCUSTOMER_1_0">
+    <End Role="CUSTOMERS" Type="Self.CUSTOMER" Multiplicity="0..1" />
+    <End Role="AUTODRIVERCUSTOMER" Type="Self.AUTODRIVERCUSTOMER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMERS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AUTODRIVERCUSTOMER">
+        <PropertyRef Name="CUSTOMERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AUTODRIVERCUSTOMER_2_0">
+    <End Role="AUTOS" Type="Self.AUTO" Multiplicity="0..1" />
+    <End Role="AUTODRIVERCUSTOMER" Type="Self.AUTODRIVERCUSTOMER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AUTOS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AUTODRIVERCUSTOMER">
+        <PropertyRef Name="AUTOID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AUTODRIVERCUSTOMER_3_0">
+    <End Role="DRIVERS" Type="Self.DRIVER" Multiplicity="0..1" />
+    <End Role="AUTODRIVERCUSTOMER" Type="Self.AUTODRIVERCUSTOMER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DRIVERS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AUTODRIVERCUSTOMER">
+        <PropertyRef Name="DRIVERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRASPORTERAUTOS_0_0">
+    <End Role="AUTOS" Type="Self.AUTO" Multiplicity="1" />
+    <End Role="TRASPORTERAUTOS" Type="Self.TRASPORTERAUTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AUTOS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TRASPORTERAUTOS">
+        <PropertyRef Name="AUTOID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTES_6_0">
+    <End Role="CHECKPOINTS" Type="Self.CHECKPOINT" Multiplicity="0..1" />
+    <End Role="NOTES" Type="Self.NOTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CHECKPOINTS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NOTES">
+        <PropertyRef Name="CHECKPOINTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTES_5_0">
+    <End Role="COMMODITIES" Type="Self.COMMODITy" Multiplicity="0..1" />
+    <End Role="NOTES" Type="Self.NOTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COMMODITIES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NOTES">
+        <PropertyRef Name="COMMODITYID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTES_3_0">
+    <End Role="CUSTOMERPERSONS" Type="Self.CUSTOMERPERSON" Multiplicity="0..1" />
+    <End Role="NOTES" Type="Self.NOTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMERPERSONS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NOTES">
+        <PropertyRef Name="CUSTOMERPERSONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTES_9_0">
+    <End Role="CUSTOMERS" Type="Self.CUSTOMER" Multiplicity="0..1" />
+    <End Role="NOTES" Type="Self.NOTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMERS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NOTES">
+        <PropertyRef Name="CUSTOMERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTES_7_0">
+    <End Role="CUSTOMERTYPES" Type="Self.CUSTOMERTYPE" Multiplicity="1" />
+    <End Role="NOTES" Type="Self.NOTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMERTYPES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NOTES">
+        <PropertyRef Name="CUSTOMERTYPEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTES_8_0">
+    <End Role="DRIVERS" Type="Self.DRIVER" Multiplicity="0..1" />
+    <End Role="NOTES" Type="Self.NOTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DRIVERS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NOTES">
+        <PropertyRef Name="DRIVERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTES_0_0">
+    <End Role="NOTES" Type="Self.NOTE" Multiplicity="0..1" />
+    <End Role="NOTES1" Type="Self.NOTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NOTES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NOTES1">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTES_1_0">
+    <End Role="ORGANIZATIONS" Type="Self.ORGANIZATION" Multiplicity="0..1" />
+    <End Role="NOTES" Type="Self.NOTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NOTES">
+        <PropertyRef Name="endPoint" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTES_2_0">
+    <End Role="USERS" Type="Self.USER" Multiplicity="0..1" />
+    <End Role="NOTES" Type="Self.NOTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NOTES">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NOTES_4_0">
+    <End Role="TRASPORTERS" Type="Self.TRASPORTER" Multiplicity="0..1" />
+    <End Role="NOTES" Type="Self.NOTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRASPORTERS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NOTES">
+        <PropertyRef Name="TRANSPORTERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SNAPSHOTS_0_0">
+    <End Role="NOTES" Type="Self.NOTE" Multiplicity="0..1" />
+    <End Role="SNAPSHOTS" Type="Self.SNAPSHOT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NOTES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SNAPSHOTS">
+        <PropertyRef Name="NOTENUMBER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WEIGHTING_0_0">
+    <End Role="NOTES" Type="Self.NOTE" Multiplicity="0..1" />
+    <End Role="WEIGHTING" Type="Self.WEIGHTING" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NOTES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WEIGHTING">
+        <PropertyRef Name="NOTENUMBER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRASPORTERAUTOS_1_0">
+    <End Role="TRASPORTERS" Type="Self.TRASPORTER" Multiplicity="1" />
+    <End Role="TRASPORTERAUTOS" Type="Self.TRASPORTERAUTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRASPORTERS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TRASPORTERAUTOS">
+        <PropertyRef Name="TRANSPORTERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="StudDBEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="AUTODRIVERCUSTOMER" EntityType="Self.AUTODRIVERCUSTOMER" />
-    <EntitySet Name="AUTOS" EntityType="Self.AUTOS" />
-    <EntitySet Name="CHECKPOINTS" EntityType="Self.CHECKPOINTS" />
-    <EntitySet Name="COMMODITIES" EntityType="Self.COMMODITIES" />
-    <EntitySet Name="CUSTOMERPERSONS" EntityType="Self.CUSTOMERPERSONS" />
-    <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" />
-    <EntitySet Name="CUSTOMERTYPES" EntityType="Self.CUSTOMERTYPES" />
-    <EntitySet Name="DRIVERS" EntityType="Self.DRIVERS" />
-    <EntitySet Name="NOTES" EntityType="Self.NOTES" />
-    <EntitySet Name="ORGANIZATIONS" EntityType="Self.ORGANIZATIONS" />
-    <EntitySet Name="SNAPSHOTS" EntityType="Self.SNAPSHOTS" />
-    <EntitySet Name="TRASPORTERAUTOS" EntityType="Self.TRASPORTERAUTOS" />
-    <EntitySet Name="TRASPORTERS" EntityType="Self.TRASPORTERS" />
-    <EntitySet Name="USERS" EntityType="Self.USERS" />
-    <EntitySet Name="WEIGHTING" EntityType="Self.WEIGHTING" />
+    <EntitySet Name="AUTODRIVERCUSTOMERs" EntityType="Self.AUTODRIVERCUSTOMER" />
+    <EntitySet Name="AUTOS" EntityType="Self.AUTO" />
+    <EntitySet Name="CHECKPOINTS" EntityType="Self.CHECKPOINT" />
+    <EntitySet Name="COMMODITIES" EntityType="Self.COMMODITy" />
+    <EntitySet Name="CUSTOMERPERSONS" EntityType="Self.CUSTOMERPERSON" />
+    <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMER" />
+    <EntitySet Name="CUSTOMERTYPES" EntityType="Self.CUSTOMERTYPE" />
+    <EntitySet Name="DRIVERS" EntityType="Self.DRIVER" />
+    <EntitySet Name="NOTES" EntityType="Self.NOTE" />
+    <EntitySet Name="ORGANIZATIONS" EntityType="Self.ORGANIZATION" />
+    <EntitySet Name="SNAPSHOTS" EntityType="Self.SNAPSHOT" />
+    <EntitySet Name="TRASPORTERAUTOS" EntityType="Self.TRASPORTERAUTO" />
+    <EntitySet Name="TRASPORTERS" EntityType="Self.TRASPORTER" />
+    <EntitySet Name="USERS" EntityType="Self.USER" />
+    <EntitySet Name="WEIGHTINGs" EntityType="Self.WEIGHTING" />
+    <AssociationSet Name="FK_AUTODRIVERCUSTOMER_0_0" Association="Self.FK_AUTODRIVERCUSTOMER_0_0">
+      <End Role="CUSTOMERPERSONS" EntitySet="CUSTOMERPERSONS" />
+      <End Role="AUTODRIVERCUSTOMER" EntitySet="AUTODRIVERCUSTOMERs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AUTODRIVERCUSTOMER_1_0" Association="Self.FK_AUTODRIVERCUSTOMER_1_0">
+      <End Role="CUSTOMERS" EntitySet="CUSTOMERS" />
+      <End Role="AUTODRIVERCUSTOMER" EntitySet="AUTODRIVERCUSTOMERs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AUTODRIVERCUSTOMER_2_0" Association="Self.FK_AUTODRIVERCUSTOMER_2_0">
+      <End Role="AUTOS" EntitySet="AUTOS" />
+      <End Role="AUTODRIVERCUSTOMER" EntitySet="AUTODRIVERCUSTOMERs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AUTODRIVERCUSTOMER_3_0" Association="Self.FK_AUTODRIVERCUSTOMER_3_0">
+      <End Role="DRIVERS" EntitySet="DRIVERS" />
+      <End Role="AUTODRIVERCUSTOMER" EntitySet="AUTODRIVERCUSTOMERs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRASPORTERAUTOS_0_0" Association="Self.FK_TRASPORTERAUTOS_0_0">
+      <End Role="AUTOS" EntitySet="AUTOS" />
+      <End Role="TRASPORTERAUTOS" EntitySet="TRASPORTERAUTOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTES_6_0" Association="Self.FK_NOTES_6_0">
+      <End Role="CHECKPOINTS" EntitySet="CHECKPOINTS" />
+      <End Role="NOTES" EntitySet="NOTES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTES_5_0" Association="Self.FK_NOTES_5_0">
+      <End Role="COMMODITIES" EntitySet="COMMODITIES" />
+      <End Role="NOTES" EntitySet="NOTES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTES_3_0" Association="Self.FK_NOTES_3_0">
+      <End Role="CUSTOMERPERSONS" EntitySet="CUSTOMERPERSONS" />
+      <End Role="NOTES" EntitySet="NOTES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTES_9_0" Association="Self.FK_NOTES_9_0">
+      <End Role="CUSTOMERS" EntitySet="CUSTOMERS" />
+      <End Role="NOTES" EntitySet="NOTES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTES_7_0" Association="Self.FK_NOTES_7_0">
+      <End Role="CUSTOMERTYPES" EntitySet="CUSTOMERTYPES" />
+      <End Role="NOTES" EntitySet="NOTES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTES_8_0" Association="Self.FK_NOTES_8_0">
+      <End Role="DRIVERS" EntitySet="DRIVERS" />
+      <End Role="NOTES" EntitySet="NOTES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTES_0_0" Association="Self.FK_NOTES_0_0">
+      <End Role="NOTES" EntitySet="NOTES" />
+      <End Role="NOTES1" EntitySet="NOTES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTES_1_0" Association="Self.FK_NOTES_1_0">
+      <End Role="ORGANIZATIONS" EntitySet="ORGANIZATIONS" />
+      <End Role="NOTES" EntitySet="NOTES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTES_2_0" Association="Self.FK_NOTES_2_0">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="NOTES" EntitySet="NOTES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NOTES_4_0" Association="Self.FK_NOTES_4_0">
+      <End Role="TRASPORTERS" EntitySet="TRASPORTERS" />
+      <End Role="NOTES" EntitySet="NOTES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SNAPSHOTS_0_0" Association="Self.FK_SNAPSHOTS_0_0">
+      <End Role="NOTES" EntitySet="NOTES" />
+      <End Role="SNAPSHOTS" EntitySet="SNAPSHOTS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WEIGHTING_0_0" Association="Self.FK_WEIGHTING_0_0">
+      <End Role="NOTES" EntitySet="NOTES" />
+      <End Role="WEIGHTING" EntitySet="WEIGHTINGs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRASPORTERAUTOS_1_0" Association="Self.FK_TRASPORTERAUTOS_1_0">
+      <End Role="TRASPORTERS" EntitySet="TRASPORTERS" />
+      <End Role="TRASPORTERAUTOS" EntitySet="TRASPORTERAUTOS" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

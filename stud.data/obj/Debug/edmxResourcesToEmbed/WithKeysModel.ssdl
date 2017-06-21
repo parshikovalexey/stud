@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="truck0Model.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=D:\work\Develop\stud\stud\stud.data\truck0.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="NOTES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="DATE" Type="datetime" />
+    <Property Name="CUSTOMERID" Type="int" />
+    <Property Name="DRIVERID" Type="int" />
+    <Property Name="CUSTOMERTYPEID" Type="int" />
+    <Property Name="CHECKPOINTID" Type="int" />
+    <Property Name="COMMODITYID" Type="int" />
+    <Property Name="AUTONUMBER" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="CHECKNUMBER" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="TIMESTAMP" Type="datetime" />
+    <Property Name="TRANSPORTERID" Type="integer" />
+    <Property Name="CUSTOMERPERSONID" Type="integer" />
+    <Property Name="CLOSED" Type="integer" />
+    <Property Name="RETURNED" Type="integer" />
+    <Property Name="RETURNMESSAGE" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="USERID" Type="int" />
+    <Property Name="SystemGuid" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Sync" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+    <Property Name="endPoint" Type="int" />
+    <Property Name="ParentId" Type="int" />
+    <Property Name="waybill" Type="int" />
+    <Property Name="Reconciliation" Type="bit" />
+    <Property Name="Lock" Type="bit" />
+    <Property Name="TrailerNumber" Type="nvarchar" MaxLength="2147483647" />
+  </EntityType>
+  <EntityType Name="WEIGHTINGS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WEIGHTTIME" Type="datetime" />
+    <Property Name="WEIGHT" Type="real" />
+    <Property Name="NOTENUMBER" Type="int" />
+    <Property Name="CONTAINERTYPE" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="TIMESTAMP" Type="datetime" />
+    <Property Name="Sync" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_WEIGHTINGS_0_0">
+    <End Role="NOTES" Type="Self.NOTES" Multiplicity="0..1" />
+    <End Role="WEIGHTINGS" Type="Self.WEIGHTINGS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NOTES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WEIGHTINGS">
+        <PropertyRef Name="NOTENUMBER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="truck0ModelStoreContainer">
+    <EntitySet Name="NOTES" EntityType="Self.NOTES" store:Type="Tables" />
+    <EntitySet Name="WEIGHTINGS" EntityType="Self.WEIGHTINGS" store:Type="Tables" />
+    <AssociationSet Name="FK_WEIGHTINGS_0_0" Association="Self.FK_WEIGHTINGS_0_0">
+      <End Role="NOTES" EntitySet="NOTES" />
+      <End Role="WEIGHTINGS" EntitySet="WEIGHTINGS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

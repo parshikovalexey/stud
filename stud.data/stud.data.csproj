@@ -71,41 +71,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AUTO.cs">
+      <DependentUpon>StudDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AUTODRIVERCUSTOMER.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="AUTOS.cs">
+    <Compile Include="CHECKPOINT.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CHECKPOINTS.cs">
+    <Compile Include="COMMODITy.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="COMMODITIES.cs">
+    <Compile Include="CUSTOMER.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CUSTOMERPERSONS.cs">
+    <Compile Include="CUSTOMERPERSON.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CUSTOMERS.cs">
+    <Compile Include="CUSTOMERTYPE.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CUSTOMERTYPES.cs">
-      <DependentUpon>StudDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DRIVERS.cs">
+    <Compile Include="DRIVER.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="NOTE.cs">
-      <DependentUpon>WithKeysModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NOTES.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORGANIZATIONS.cs">
+    <Compile Include="ORGANIZATION.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SNAPSHOTS.cs">
+    <Compile Include="SNAPSHOT.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StudDBModel.Context.cs">
@@ -123,38 +120,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StudDBModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="TRASPORTERAUTOS.cs">
+    <Compile Include="TRASPORTER.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TRASPORTERS.cs">
+    <Compile Include="TRASPORTERAUTO.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="USERS.cs">
+    <Compile Include="USER.cs">
       <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="WEIGHTING.cs">
-      <DependentUpon>WithKeysModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WithKeysModel.Context.cs" />
-    <Compile Include="WithKeysModel.Context1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WithKeysModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WithKeysModel.cs" />
-    <Compile Include="WithKeysModel.Designer.cs">
-      <DependentUpon>WithKeysModel.edmx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="WithKeysModel1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WithKeysModel.tt</DependentUpon>
+      <DependentUpon>StudDBModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <EntityDeploy Include="StudDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -162,16 +144,6 @@
     </EntityDeploy>
     <None Include="StudDBModel.edmx.diagram">
       <DependentUpon>StudDBModel.edmx</DependentUpon>
-    </None>
-    <None Include="truck0.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <EntityDeploy Include="WithKeysModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WithKeysModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="WithKeysModel.edmx.diagram">
-      <DependentUpon>WithKeysModel.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -187,14 +159,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StudDBModel.edmx</DependentUpon>
       <LastGenOutput>StudDBModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="WithKeysModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>WithKeysModel.Context1.cs</LastGenOutput>
-    </Content>
-    <Content Include="WithKeysModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>WithKeysModel1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

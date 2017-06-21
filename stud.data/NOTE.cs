@@ -17,35 +17,53 @@ namespace stud.data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NOTE()
         {
-            this.WEIGHTINGS = new HashSet<WEIGHTING>();
+            this.NOTES1 = new HashSet<NOTE>();
+            this.SNAPSHOTS = new HashSet<SNAPSHOT>();
+            this.WEIGHTINGs = new HashSet<WEIGHTING>();
         }
     
-        public int ID { get; set; }
+        public long ID { get; set; }
         public Nullable<System.DateTime> DATE { get; set; }
-        public Nullable<int> CUSTOMERID { get; set; }
-        public Nullable<int> DRIVERID { get; set; }
-        public Nullable<int> CUSTOMERTYPEID { get; set; }
-        public Nullable<int> CHECKPOINTID { get; set; }
-        public Nullable<int> COMMODITYID { get; set; }
         public string AUTONUMBER { get; set; }
         public string CHECKNUMBER { get; set; }
         public Nullable<System.DateTime> TIMESTAMP { get; set; }
-        public Nullable<long> TRANSPORTERID { get; set; }
-        public Nullable<long> CUSTOMERPERSONID { get; set; }
-        public Nullable<long> CLOSED { get; set; }
-        public Nullable<long> RETURNED { get; set; }
+        public Nullable<int> CLOSED { get; set; }
+        public Nullable<int> RETURNED { get; set; }
         public string RETURNMESSAGE { get; set; }
-        public Nullable<int> USERID { get; set; }
         public string SystemGuid { get; set; }
         public string Sync { get; set; }
-        public Nullable<int> endPoint { get; set; }
-        public Nullable<int> ParentId { get; set; }
         public Nullable<int> waybill { get; set; }
         public Nullable<bool> Reconciliation { get; set; }
         public Nullable<bool> Lock { get; set; }
         public string TrailerNumber { get; set; }
+        public string Pile { get; set; }
+        public Nullable<long> StorageId { get; set; }
+        public Nullable<long> CUSTOMERID { get; set; }
+        public Nullable<long> DRIVERID { get; set; }
+        public long CUSTOMERTYPEID { get; set; }
+        public Nullable<long> CHECKPOINTID { get; set; }
+        public Nullable<long> COMMODITYID { get; set; }
+        public Nullable<long> TRANSPORTERID { get; set; }
+        public Nullable<long> CUSTOMERPERSONID { get; set; }
+        public Nullable<long> USERID { get; set; }
+        public Nullable<long> endPoint { get; set; }
+        public Nullable<long> ParentId { get; set; }
     
+        public virtual CHECKPOINT CHECKPOINT { get; set; }
+        public virtual COMMODITy COMMODITy { get; set; }
+        public virtual CUSTOMERPERSON CUSTOMERPERSON { get; set; }
+        public virtual CUSTOMER CUSTOMER { get; set; }
+        public virtual CUSTOMERTYPE CUSTOMERTYPE { get; set; }
+        public virtual DRIVER DRIVER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WEIGHTING> WEIGHTINGS { get; set; }
+        public virtual ICollection<NOTE> NOTES1 { get; set; }
+        public virtual NOTE NOTE1 { get; set; }
+        public virtual ORGANIZATION ORGANIZATION { get; set; }
+        public virtual USER USER { get; set; }
+        public virtual TRASPORTER TRASPORTER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SNAPSHOT> SNAPSHOTS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WEIGHTING> WEIGHTINGs { get; set; }
     }
 }
