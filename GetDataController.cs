@@ -21,7 +21,7 @@ namespace WebApplication2.Controllers
     {
         [Route("weightings")]
         [HttpGet]
-        public HttpResponseMessage GetWeightings() 
+        public HttpResponseMessage SaveWeightings()
         {
             try
             {
@@ -43,7 +43,7 @@ namespace WebApplication2.Controllers
 
         [Route("weightings/{weightId}")]
         [HttpGet]
-        public HttpResponseMessage GetWeightings(int? WeightId)
+        public HttpResponseMessage SaveWeightings(int? WeightId)
         {
             if (WeightId == null || WeightId < 0)
                 return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidWeightId, "Provide correct weightId"), JsonFormatter);
@@ -72,7 +72,7 @@ namespace WebApplication2.Controllers
 
         [Route("weightings")]
         [HttpPost]
-        public HttpResponseMessage GetWeightings(WeightModels request)
+        public HttpResponseMessage SaveWeightings(WeightModels request)
         {
             if (request == null || request.Weight == null)
                 return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidWeightModel, "Provide correct WeightModels"), JsonFormatter);
@@ -94,62 +94,57 @@ namespace WebApplication2.Controllers
 
         [Route("weightings")]
         [HttpPost]
-        public HttpResponseMessage GetWeightings(List<WeightModels> list) // добавил метод, который получает список взвешиваний
+        public HttpResponseMessage SaveWeightings(List<WeightModels> weightings) // поменял название на SaveWeightings
         {
-            string resJson = "";
-            HttpResponseMessage res = Request.CreateResponse();
-            bool isBadRequest = false; // если входные данные некорректны - изменяем на true
-            for (int i = 0; i < list.Count; i++)
+            try // отлавливаем Exeption
             {
-                var request = list[i];
-                if (request.WeightId == null || request.WeightId < 0) // проверка корректности Id
+                HttpResponseMessage errorResponse = Request.CreateResponse(); // поменял имя переменной на errorResponse
+                bool isBadRequest = false; // если входные данные некорректны - изменяем на true
+                for (int i = 0; i < weightings.Count; i++)
                 {
-                    res = Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidWeightId, "Provide correct weightId", i), JsonFormatter);
-                    isBadRequest = true;
-                    break;
+                    var request = weightings[i];
+                    if (request.WeightId == null || request.WeightId < 0) // проверка корректности Id
+                    {
+                        errorResponse = Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidWeightId, "Provide correct weightId", i), JsonFormatter);
+                        isBadRequest = true;
+                        break;
+                    }
+
+                    if (request.Weight == null) // проверка корректности взвешивания
+                    {
+                        errorResponse = Request.CreateResponse(HttpStatusCode.NotFound, new ErrorResponse(ErrorCodes.WeightNotFound, "No weight found against weightId", i), JsonFormatter);
+                        isBadRequest = true;
+                        break;
+                    }
+
+                    if (request.Weight <= 10.0) // проверка корректности взвешивания
+                    {
+                        errorResponse = Request.CreateResponse(HttpStatusCode.NotFound, new ErrorResponse(ErrorCodes.SaveWeightError, "Weight so small"), JsonFormatter);
+                        isBadRequest = true;
+                        break;
+                    }
                 }
 
-                if (request.Weight == null) // проверка корректности взвешивания
+                if (!isBadRequest)
                 {
-                    res = Request.CreateResponse(HttpStatusCode.NotFound, new ErrorResponse(ErrorCodes.WeightNotFound, "No weight found against weightId", i), JsonFormatter);
-                    isBadRequest = true;
-                    break;
+                    try
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, weightings, JsonFormatter);
+                    }
+                    catch (Exception ex)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.InternalServerError, ex, JsonFormatter);
+                    }
                 }
-
-                if (request == null) // проверка корретности модели
+                else
                 {
-                    res = Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidWeightModel, "Provide correct WeightModels", i), JsonFormatter);
-                    isBadRequest = true;
-                    break;
-                }
-
-                if (request.Weight <= 10.0) // проверка корректности взвешивания
-                {
-                    res = Request.CreateResponse(HttpStatusCode.NotFound, new ErrorResponse(ErrorCodes.SaveWeightError, "Weight so small"), JsonFormatter);
-                    isBadRequest = true;
-                    break;
-                }
-
-                resJson += GetJson(request);
-            }
-
-            if (!isBadRequest)
-            {
-                try
-                {
-                    res = Request.CreateResponse(HttpStatusCode.OK, list, resJson);
-                    return res;
-                }
-                catch (Exception ex)
-                {
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError, ex, JsonFormatter);
+                    return errorResponse;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                return res;
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex, JsonFormatter);
             }
-            
         }
 
         public XElement GetXml(WeightModels w)
