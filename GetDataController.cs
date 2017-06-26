@@ -21,7 +21,7 @@ namespace WebApplication2.Controllers
     {
         [Route("weightings")]
         [HttpGet]
-        public HttpResponseMessage SaveWeightings()
+        public HttpResponseMessage GetWeightings()
         {
             try
             {
@@ -43,7 +43,7 @@ namespace WebApplication2.Controllers
 
         [Route("weightings/{weightId}")]
         [HttpGet]
-        public HttpResponseMessage SaveWeightings(int? WeightId)
+        public HttpResponseMessage GetWeightings(int? WeightId)
         {
             if (WeightId == null || WeightId < 0)
                 return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidWeightId, "Provide correct weightId"), JsonFormatter);
