@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -11,7 +11,11 @@ namespace WebApplication2.Models
         InvalidWeightId = 1,
         WeightNotFound = 2,
         InvalidWeightModel = 3,
-        SaveWeightError = 4
+        SaveWeightError = 4,
+        InvalidUserInfoModel = 5,
+        InvalidUserID = 6,
+        ChangePasswordError = 7,
+        InvalidLikesModel = 8
     }
 
 
@@ -25,7 +29,7 @@ namespace WebApplication2.Models
         {
         }
 
-        public ErrorResponse(ErrorCodes ErrorCode, string Message, int Index) // добавил конструктор
+        public ErrorResponse(ErrorCodes ErrorCode, string Message, int IndexOfError) // добавил конструктор
         {
             this.ErrorCode = ErrorCode;
             this.Message = Message;
