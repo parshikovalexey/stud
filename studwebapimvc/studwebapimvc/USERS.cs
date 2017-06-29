@@ -14,6 +14,12 @@ namespace studwebapimvc
     
     public partial class USERS
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public USERS()
+        {
+            this.NOTES = new HashSet<NOTES>();
+        }
+    
         public long ID { get; set; }
         public string Login { get; set; }
         public string PWD { get; set; }
@@ -23,5 +29,8 @@ namespace studwebapimvc
         public string POSITION { get; set; }
         public int EDITOR { get; set; }
         public string Sync { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NOTES> NOTES { get; set; }
     }
 }

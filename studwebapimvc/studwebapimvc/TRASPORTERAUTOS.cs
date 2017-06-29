@@ -14,9 +14,12 @@ namespace studwebapimvc
     
     public partial class TRASPORTERAUTOS
     {
-        public int TRANSPORTERID { get; set; }
-        public int AUTOID { get; set; }
+        public long TRANSPORTERID { get; set; }
+        public long AUTOID { get; set; }
         public Nullable<System.DateTime> TIMESTAMP { get; set; }
         public string Sync { get; set; }
+    
+        public virtual AUTOS AUTOS { get; set; }
+        public virtual TRASPORTERS TRASPORTERS { get; set; }
     }
 }

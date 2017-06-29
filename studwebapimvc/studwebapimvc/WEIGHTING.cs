@@ -20,6 +20,8 @@ namespace studwebapimvc
         public string CONTAINERTYPE { get; set; }
         public Nullable<System.DateTime> TIMESTAMP { get; set; }
         public string Sync { get; set; }
-        public Nullable<int> NOTENUMBER { get; set; }
+        public Nullable<long> NOTENUMBER { get; set; }
+    
+        public virtual NOTES NOTES { get; set; }
     }
 }

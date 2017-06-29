@@ -14,6 +14,14 @@ namespace studwebapimvc
     
     public partial class NOTES
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public NOTES()
+        {
+            this.NOTES1 = new HashSet<NOTES>();
+            this.SNAPSHOTS = new HashSet<SNAPSHOTS>();
+            this.WEIGHTING = new HashSet<WEIGHTING>();
+        }
+    
         public long ID { get; set; }
         public Nullable<System.DateTime> DATE { get; set; }
         public string AUTONUMBER { get; set; }
@@ -29,16 +37,33 @@ namespace studwebapimvc
         public Nullable<bool> Lock { get; set; }
         public string TrailerNumber { get; set; }
         public string Pile { get; set; }
-        public Nullable<int> StorageId { get; set; }
-        public Nullable<int> CUSTOMERID { get; set; }
-        public Nullable<int> DRIVERID { get; set; }
-        public int CUSTOMERTYPEID { get; set; }
-        public Nullable<int> CHECKPOINTID { get; set; }
-        public Nullable<int> COMMODITYID { get; set; }
-        public Nullable<int> TRANSPORTERID { get; set; }
-        public Nullable<int> CUSTOMERPERSONID { get; set; }
-        public Nullable<int> USERID { get; set; }
-        public Nullable<int> endPoint { get; set; }
-        public Nullable<int> ParentId { get; set; }
+        public Nullable<long> StorageId { get; set; }
+        public Nullable<long> CUSTOMERID { get; set; }
+        public Nullable<long> DRIVERID { get; set; }
+        public long CUSTOMERTYPEID { get; set; }
+        public Nullable<long> CHECKPOINTID { get; set; }
+        public Nullable<long> COMMODITYID { get; set; }
+        public Nullable<long> TRANSPORTERID { get; set; }
+        public Nullable<long> CUSTOMERPERSONID { get; set; }
+        public Nullable<long> USERID { get; set; }
+        public Nullable<long> endPoint { get; set; }
+        public Nullable<long> ParentId { get; set; }
+    
+        public virtual CHECKPOINTS CHECKPOINTS { get; set; }
+        public virtual COMMODITIES COMMODITIES { get; set; }
+        public virtual CUSTOMERPERSONS CUSTOMERPERSONS { get; set; }
+        public virtual CUSTOMERS CUSTOMERS { get; set; }
+        public virtual CUSTOMERTYPES CUSTOMERTYPES { get; set; }
+        public virtual DRIVERS DRIVERS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NOTES> NOTES1 { get; set; }
+        public virtual NOTES NOTES2 { get; set; }
+        public virtual ORGANIZATIONS ORGANIZATIONS { get; set; }
+        public virtual USERS USERS { get; set; }
+        public virtual TRASPORTERS TRASPORTERS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SNAPSHOTS> SNAPSHOTS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WEIGHTING> WEIGHTING { get; set; }
     }
 }

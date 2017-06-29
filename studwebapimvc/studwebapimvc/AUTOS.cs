@@ -14,11 +14,23 @@ namespace studwebapimvc
     
     public partial class AUTOS
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AUTOS()
+        {
+            this.AUTODRIVERCUSTOMER = new HashSet<AUTODRIVERCUSTOMER>();
+            this.TRASPORTERAUTOS = new HashSet<TRASPORTERAUTOS>();
+        }
+    
         public long ID { get; set; }
         public string AUTONUMBER { get; set; }
         public string BRAND { get; set; }
         public Nullable<System.DateTime> TIMESTAMP { get; set; }
         public string Sync { get; set; }
         public string PathPhoto { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AUTODRIVERCUSTOMER> AUTODRIVERCUSTOMER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TRASPORTERAUTOS> TRASPORTERAUTOS { get; set; }
     }
 }

@@ -19,6 +19,8 @@ namespace studwebapimvc
         public string Sync { get; set; }
         public string NAME { get; set; }
         public Nullable<int> Type { get; set; }
-        public Nullable<int> NOTENUMBER { get; set; }
+        public Nullable<long> NOTENUMBER { get; set; }
+    
+        public virtual NOTES NOTES { get; set; }
     }
 }

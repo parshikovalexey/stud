@@ -14,11 +14,20 @@ namespace studwebapimvc
     
     public partial class COMMODITIES
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public COMMODITIES()
+        {
+            this.NOTES = new HashSet<NOTES>();
+        }
+    
         public long ID { get; set; }
         public string NAME { get; set; }
         public Nullable<double> PRICE { get; set; }
         public Nullable<int> ACTIVE { get; set; }
         public Nullable<System.DateTime> TIMESTAMP { get; set; }
         public string Sync { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NOTES> NOTES { get; set; }
     }
 }

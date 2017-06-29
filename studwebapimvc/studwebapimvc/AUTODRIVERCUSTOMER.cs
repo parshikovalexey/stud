@@ -17,9 +17,14 @@ namespace studwebapimvc
         public long ID { get; set; }
         public Nullable<System.DateTime> TIMESTAMP { get; set; }
         public string Sync { get; set; }
-        public Nullable<int> DRIVERID { get; set; }
-        public Nullable<int> AUTOID { get; set; }
-        public Nullable<int> CUSTOMERID { get; set; }
-        public Nullable<int> CUSTOMERPERSONID { get; set; }
+        public Nullable<long> DRIVERID { get; set; }
+        public Nullable<long> AUTOID { get; set; }
+        public Nullable<long> CUSTOMERID { get; set; }
+        public Nullable<long> CUSTOMERPERSONID { get; set; }
+    
+        public virtual CUSTOMERPERSONS CUSTOMERPERSONS { get; set; }
+        public virtual CUSTOMERS CUSTOMERS { get; set; }
+        public virtual AUTOS AUTOS { get; set; }
+        public virtual DRIVERS DRIVERS { get; set; }
     }
 }

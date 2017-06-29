@@ -14,11 +14,23 @@ namespace studwebapimvc
     
     public partial class CUSTOMERPERSONS
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CUSTOMERPERSONS()
+        {
+            this.AUTODRIVERCUSTOMER = new HashSet<AUTODRIVERCUSTOMER>();
+            this.NOTES = new HashSet<NOTES>();
+        }
+    
         public long ID { get; set; }
         public string NAME { get; set; }
         public string PROXY { get; set; }
         public string INFO { get; set; }
         public Nullable<System.DateTime> TIMESTAMP { get; set; }
         public string Sync { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AUTODRIVERCUSTOMER> AUTODRIVERCUSTOMER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NOTES> NOTES { get; set; }
     }
 }
