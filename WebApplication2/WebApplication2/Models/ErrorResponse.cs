@@ -11,7 +11,11 @@ namespace WebApplication2.Models
         InvalidWeightId = 1,
         WeightNotFound = 2,
         InvalidWeightModel = 3,
-        SaveWeightError = 4
+        SaveWeightError = 4,
+        InvalidUserInfoModel = 5,
+        InvalidUserID = 6,
+        ChangePasswordError = 7,
+        InvalidLikesModel = 8
     }
 
 
