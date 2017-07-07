@@ -969,7 +969,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="databaseEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="databaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AUTODRIVERCUSTOMER" EntityType="Self.AUTODRIVERCUSTOMER" />
           <EntitySet Name="AUTOS" EntityType="Self.AUTOS" />
           <EntitySet Name="CHECKPOINTS" EntityType="Self.CHECKPOINTS" />
@@ -1063,7 +1063,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище databaseModelContainer" CdmEntityContainer="databaseEntities3">
+        <EntityContainerMapping StorageEntityContainer="Хранилище databaseModelContainer" CdmEntityContainer="databaseEntities">
           <EntitySetMapping Name="AUTODRIVERCUSTOMER">
             <EntityTypeMapping TypeName="databaseModel.AUTODRIVERCUSTOMER">
               <MappingFragment StoreEntitySet="AUTODRIVERCUSTOMER">

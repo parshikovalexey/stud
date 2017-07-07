@@ -13,10 +13,10 @@ namespace studwebapimvc
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class databaseEntities3 : DbContext
+    public partial class databaseEntities : DbContext
     {
-        public databaseEntities3()
-            : base("name=databaseEntities3")
+        public databaseEntities()
+            : base("name=databaseEntities")
         {
         }
     

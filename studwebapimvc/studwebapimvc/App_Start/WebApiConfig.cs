@@ -19,6 +19,12 @@ namespace studwebapimvc
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // отключаем возможность вывода данных в формате XML
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+
+            //добавил json
+            config.Formatters.Add(config.Formatters.JsonFormatter);
         }
     }
 }
