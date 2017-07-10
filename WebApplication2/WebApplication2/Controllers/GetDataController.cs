@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -96,9 +96,9 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public HttpResponseMessage SaveWeightings(List<WeightModels> weightings) // поменял название на SaveWeightings
         {
-            try
+            try // отлавливаем Exeption
             {
-                HttpResponseMessage errorResponse = Request.CreateResponse();
+                HttpResponseMessage errorResponse = Request.CreateResponse(); // поменял имя переменной на errorResponse
                 bool isBadRequest = false; // если входные данные некорректны - изменяем на true
                 for (int i = 0; i < weightings.Count; i++)
                 {
