@@ -146,7 +146,7 @@ namespace WebApplication2.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex, JsonFormatter);
             }
         }
-
+        
         public XElement GetXml(WeightModels w)
         {
             var res = new XElement

@@ -7,7 +7,8 @@ namespace WebApplication2.Models
 {
     public class LikesModels
     {
-        public int ID { get; set; }
+        public int UserID { get; set; } 
+        public int PostID { get; set; }
         public DateTime Time { get; set; }
 
         public LikesModels() { }

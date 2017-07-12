@@ -1,4 +1,4 @@
-using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,42 +64,34 @@ namespace WebApplication2.Controllers
 
         [Route("posts/{id}/likes")]
         [HttpPost]
-        public HttpResponseMessage Likes (List<LikesModels> likes, LikesModels newLike) // на вход подается список лайков и новый лайк
+        public HttpResponseMessage AddLike (PostsModels post, int uID, int pID) 
         {
             try
             {
-                for (int i = 0; i < likes.Count; i++) // проверяем корректность списка
+                if (post == null)
                 {
-                    if ((likes == null) || (likes[i].Time == null))
-                    {
-                        return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidUserID, "Provide correct LikesModel", i), JsonFormatter);
-                    }
-
-                    if ((likes[i].ID == null) || (likes[i].ID < 0))
-                    {
-                        return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidUserID, "Provide correct UserID", i), JsonFormatter);
-                    }
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidPost, "Post is invalid"), JsonFormatter);
+                }
+                if ((uID == null) || (uID < 0))
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidUserID, "UserID is invald"), JsonFormatter);
+                }
+                if ((pID == null) || (pID < 0))
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidPostID, "PostID is invald"), JsonFormatter);
                 }
 
-                if ((newLike == null) || (newLike.Time == null)) // проверяем корректность нового лайка
-                {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidUserID, "Provide correct LikesModel"), JsonFormatter);
-                }
-                if ((newLike.ID == null) || (newLike.ID < 0))
-                {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidUserID, "Provide correct UserID"), JsonFormatter);
-                }
-
-                likes.Add(newLike); // если ошибок нет, то добавляем новый лайк к списку
-                return Request.CreateResponse(HttpStatusCode.OK, likes, JsonFormatter);
+                LikesModels like = new LikesModels();
+                like.UserID = uID;
+                like.PostID = pID;
+                like.Time = DateTime.Now;
+                post.Likes.Add(like);
+                return Request.CreateResponse(HttpStatusCode.OK, post, JsonFormatter);
             }
             catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex, JsonFormatter);
             }
-            
-
-
         }
 
         protected JsonMediaTypeFormatter JsonFormatter => GetJsonformatter();

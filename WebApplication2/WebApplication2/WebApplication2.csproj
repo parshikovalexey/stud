@@ -255,6 +255,7 @@
     <Compile Include="Models\ErrorResponse.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LikesModels.cs" />
+    <Compile Include="Models\PostsModels.cs" />
     <Compile Include="Models\UserInfoModels.cs" />
     <Compile Include="Models\WeightModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -15,7 +15,9 @@ namespace WebApplication2.Models
         InvalidUserInfoModel = 5,
         InvalidUserID = 6,
         ChangePasswordError = 7,
-        InvalidLikesModel = 8
+        InvalidLikesModel = 8,
+        InvalidPost = 9,
+        InvalidPostID = 10
     }
 
 
