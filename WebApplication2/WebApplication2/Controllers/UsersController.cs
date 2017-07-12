@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,12 +31,10 @@ namespace WebApplication2.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex, JsonFormatter);
             }
-            
-
         }
 
-        [Route("users")]
-        [HttpPatch]
+        [Route("users/{id}/password")]
+        [HttpPut]
         public HttpResponseMessage ChangePassword (UserInfoModels user, string oldPassword, string newPassword, string repeatNewPassword)
         {
             try
@@ -64,8 +62,8 @@ namespace WebApplication2.Controllers
             }
         }
 
-        [Route("users")]
-        [HttpPatch]
+        [Route("posts/{id}/likes")]
+        [HttpPost]
         public HttpResponseMessage Likes (List<LikesModels> likes, LikesModels newLike) // на вход подается список лайков и новый лайк
         {
             try
