@@ -35,24 +35,25 @@ namespace WebApplication2.Controllers
 
         [Route("users/{id}/password")]
         [HttpPut]
-        public HttpResponseMessage ChangePassword (UserInfoModels user, string oldPassword, string newPassword, string repeatNewPassword)
+        public HttpResponseMessage ChangePassword (ChangePasswordModels changePassword)
         {
             try
             {
-                if (user.Password != oldPassword)
+                UserInfoModels user = GetDataController.GetUser(changePassword.id); // метод, который ищет пользователя по id
+                if (user.Password != changePassword.oldPassword)
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.ChangePasswordError, "The password you entered is incorrect"), JsonFormatter);
                 }
                 else
                 {
-                    if (newPassword != repeatNewPassword)
+                    if (changePassword.newPassword != changePassword.repeatNewPassword)
                     {
                         return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.ChangePasswordError, "Passwords do not match"), JsonFormatter);
                     }
                     else
                     {
-                        user.Password = newPassword;
-                        return Request.CreateResponse(HttpStatusCode.OK, JsonFormatter);
+                        user.Password = changePassword.newPassword;
+                        return Request.CreateResponse(HttpStatusCode.OK, changePassword.newPassword, JsonFormatter);
                     }
                 }
             }
@@ -64,27 +65,23 @@ namespace WebApplication2.Controllers
 
         [Route("posts/{id}/likes")]
         [HttpPost]
-        public HttpResponseMessage AddLike (PostsModels post, int uID, int pID) 
+        public HttpResponseMessage AddLike (LikesModels like) 
         {
             try
             {
+                PostsModels post = GetDataController.GetPost(like.PostID); // метод, который ищет пост по id
                 if (post == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidPost, "Post is invalid"), JsonFormatter);
                 }
-                if ((uID == null) || (uID < 0))
+                if ((like.UserID == null) || (like.UserID < 0))
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidUserID, "UserID is invald"), JsonFormatter);
                 }
-                if ((pID == null) || (pID < 0))
+                if ((like.PostID == null) || (like.PostID < 0))
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCodes.InvalidPostID, "PostID is invald"), JsonFormatter);
                 }
-
-                LikesModels like = new LikesModels();
-                like.UserID = uID;
-                like.PostID = pID;
-                like.Time = DateTime.Now;
                 post.Likes.Add(like);
                 return Request.CreateResponse(HttpStatusCode.OK, post, JsonFormatter);
             }
